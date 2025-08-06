@@ -5,356 +5,355 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daily Canteen Menu</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
 
-    html,
-    body {
-      height: 100%;
-      background-color: #f8f9fa;
-      padding: 0;
-      margin: 0;
-      color: #333;
-    }
+  html,
+  body {
+    height: 100%;
+    background-color: #f9f9f6;
+    color: #2b2b2b;
+  }
 
-    .container {
-      max-width: 98%;
-      margin: 0 auto;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
+  .container {
+    max-width: 98%;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
 
-    .header {
-      background-color: #4a6fdc;
-      color: white;
-      padding: 10px 0 15px;
-      text-align: center;
-      flex-shrink: 0;
-    }
+  .header {
+    background: linear-gradient(to right, #4a148c, #6a1b9a);
+    color: white;
+    padding: 10px 0 15px;
+    text-align: center;
+    flex-shrink: 0;
+  }
 
-    .header h1 {
-      font-size: 2.2rem;
-      margin-bottom: 5px;
-    }
+  .header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+    color: #ffffff;
+  }
 
-    .header p {
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
+  .header p {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    color: #e0d7f5;
+  }
 
-    .price-table-container {
-      margin: 20px;
-      padding: 15px;
-      background-color: #f0f4ff;
-      border-radius: 8px;
-      width: calc(100% - 40px);
-      box-sizing: border-box;
-      flex-shrink: 0;
-    }
+  .price-table-container {
+    margin: 20px;
+    padding: 15px;
+    background-color: #f2f6ff;
+    border-radius: 8px;
+    width: calc(100% - 40px);
+    flex-shrink: 0;
+  }
 
-    .price-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
+  .price-table th,
+  .price-table td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dcdde1;
+  }
 
-    .price-table th,
-    .price-table td {
-      padding: 10px 15px;
-      text-align: left;
-      border-bottom: 1px solid #e0e0e0;
-    }
+  .price-table th {
+    background-color: #ede7f6;
+    font-weight: 600;
+    color: #512da8;
+    font-size: 1rem;
+  }
 
-    .price-table th {
-      background-color: #e8eeff;
-      font-weight: 600;
-      color: #4a6fdc;
-      font-size: 1rem;
-    }
+  .price-table tr:last-child td {
+    border-bottom: none;
+  }
 
-    .price-table tr:last-child td {
-      border-bottom: none;
-    }
+  .price-table .price-value {
+    font-weight: 500;
+    text-align: right;
+  }
 
-    .price-table .price-value {
-      font-weight: 500;
-      text-align: right;
-    }
+  .price-table .subsidy-price {
+    color: #2e7d32;
+  }
 
-    .price-table .subsidy-price {
-      color: #2e7d32;
-    }
+  .price-table .commercial-price {
+    color: #d84315;
+  }
 
-    .price-table .commercial-price {
-      color: #e65100;
-    }
+  .menu-content-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px 20px;
+    display: flex;
+    flex-direction: column;
+  }
 
-    .menu-content-wrapper {
-      flex: 1;
-      overflow-y: auto;
-      padding: 0 20px 20px;
-      display: flex;
-      flex-direction: column;
-    }
+  .menu-container {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 0;
+    flex: 1;
+  }
 
+  .menu-section {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe;
+  }
+
+  .breakfast-section {
+    flex: 0 0 40%;
+  }
+
+  .lunch-dinner-section {
+    flex: 0 0 58%;
+  }
+
+  .lunch-dinner-content {
+    display: flex;
+    flex: 1;
+  }
+
+  .lunch-column,
+  .dinner-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .lunch-column {
+    border-right: 1px dashed #ccc;
+  }
+
+  .section-header {
+    background-color: #f3e5f5;
+    padding: 10px;
+    border-bottom: 1px solid #d1c4e9;
+    flex-shrink: 0;
+  }
+
+  .section-header h2 {
+    color: #6a1b9a;
+    font-size: 1.5rem;
+  }
+
+  .subsection {
+    padding: 10px;
+    border-bottom: 1px dashed #dcdde1;
+    flex: 1;
+  }
+
+  .subsection:last-child {
+    border-bottom: none;
+  }
+
+  .subsection h3 {
+    color: #37474f;
+    margin-bottom: 15px;
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .subsection h3::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #6a1b9a;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 80px;
+  }
+
+  .item-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  }
+
+  .item-img {
+    width: 80%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+
+  .item-content {
+    padding: 12px;
+  }
+
+  .item-name {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  .price-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.6rem;
+    margin-top: 10px;
+  }
+
+  .price {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .subsidy {
+    background-color: #e0f7f0;
+    color: #00796b;
+  }
+
+  .commercial {
+    background-color: #fff3e0;
+    color: #ef6c00;
+  }
+
+  .special-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .lunch-section {
+    flex: 1;
+    margin-right: 10px;
+  }
+
+  .dinner-section {
+    flex: 1;
+    margin-left: 10px;
+  }
+
+  .horizontal-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    padding: 0;
+  }
+
+  .horizontal-list li {
+    margin-right: 15px;
+  }
+
+  .loading {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #6c757d;
+  }
+
+  .single-column-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .text-item-card {
+    background-color: #fafafa;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+  }
+
+  .text-item-name {
+    font-weight: 600;
+    color: #2b2b2b;
+  }
+
+  .special-items {
+    border: 1px solid #ab47bc;
+    border-radius: 20px;
+    background-color: #fff3f9;
+    padding: 15px;
+  }
+
+  .special-items h2 {
+    color: #8e24aa;
+    text-decoration: underline;
+  }
+
+  .special-note {
+    color: #c62828;
+    font-weight: 500;
+  }
+
+  .special-category h3 {
+    color: #6a1b9a;
+  }
+
+  .special-list {
+    color: #4e342e;
+  }
+  .price-lunch-dinner{
+    margin: 0px 10px;
+  }
+
+  @media (max-width: 768px) {
     .menu-container {
-      display: flex;
-      flex-wrap: nowrap;
-      padding: 0;
-      flex: 1;
-    }
-
-    .menu-section {
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      overflow: hidden;
-      margin: 10px;
-      display: flex;
       flex-direction: column;
     }
 
-    .breakfast-section {
-      flex: 0 0 40%;
-    }
-
+    .breakfast-section,
     .lunch-dinner-section {
-      flex: 0 0 58%;
+      flex: 1;
+      width: 100%;
     }
 
     .lunch-dinner-content {
-      display: flex;
-      flex: 1;
-    }
-
-    .lunch-column,
-    .dinner-column {
-      flex: 1;
-      display: flex;
       flex-direction: column;
-      padding: 10px;
     }
 
     .lunch-column {
-      border-right: 1px dashed #e0e0e0;
-    }
-
-    .section-header {
-      background-color: #f0f4ff;
-      padding: 10px;
-      border-bottom: 1px solid #e0e0e0;
-      flex-shrink: 0;
-    }
-
-    .section-header h2 {
-      color: blue;
-      font-size: 1.5rem;
-    }
-
-    .subsection {
-      padding: 10px;
+      border-right: none;
       border-bottom: 1px dashed #e0e0e0;
-      flex: 1;
-    }
-
-    .subsection:last-child {
-      border-bottom: none;
-    }
-
-    .subsection h3 {
-      color: #555;
-      margin-bottom: 15px;
-      font-size: 2rem;
-      display: flex;
-      align-items: center;
-    }
-
-    .subsection h3::before {
-      content: '';
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background-color: #4a6fdc;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
-
-    .items-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 100px;
-    }
-
-    .item-card {
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    }
-
-    .item-img {
-      width: 70%;
-      border-radius: 20px;
-      height: 150px;
-      object-fit: cover;
-    }
-
-    .item-content {
-      padding: 12px 12px 0px;
-    }
-
-    .item-name {
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #333;
-    }
-
-    .price-container {
-      display: flex;
-      justify-content: space-between;
-      font-size: 1.7rem;
-      margin: 10px 10px;
-    }
-
-    .price {
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-weight: 500;
-      margin: 10px;
-    }
-
-    .subsidy {
-      background-color: #e6f7ee;
-      color: #2e7d32;
-    }
-
-    .commercial {
-      background-color: #fff3e0;
-      color: #e65100;
     }
 
     .special-grid {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.lunch-section {
-  flex: 1;
-  margin-right: 10px;
-}
-
-.dinner-section {
-  flex: 1;
-  margin-left: 10px;
-}
-
-.horizontal-list {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 50px;
-  flex-wrap: wrap;
-  padding: 0;
-}
-
-.horizontal-list li {
-  margin-right: 15px;
-}
-
-    .loading {
-      text-align: center;
-      font-size: 1.2rem;
-      color: #666;
+      flex-direction: column;
     }
 
-    /* Styles for single column layout in lunch/dinner */
     .single-column-grid {
-      display: grid;
       grid-template-columns: 1fr;
-      gap: 15px;
     }
 
-    .text-item-card {
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      padding: 15px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
+    .price-table-container {
+      width: calc(100% - 40px);
     }
 
-    .text-item-name {
-      font-weight: 600;
-      color: #333;
+    .special-items {
+      width: 100%;
     }
-    .special-items{
-      border: 1px solid brown;
-      border-radius: 20px;
-      box-sizing: border-box;
-      padding: 13px 0px;
-    }
+  }
+</style>
 
-    .special-items h2{
-      color:blue;
-      text-decoration: underline;
-    }
-    .special-note{
-      color:Red
-    }
-    .special-category h3{
-      color:rgb(128, 31, 219)
-    }
-    .special-list{
-      color:brown;
-    }
-
-    @media (max-width: 768px) {
-      .menu-container {
-        flex-direction: column;
-      }
-
-      .breakfast-section,
-      .lunch-dinner-section {
-        flex: 1;
-        width: 100%;
-      }
-
-      .lunch-dinner-content {
-        flex-direction: column;
-      }
-
-      .lunch-column {
-        border-right: none;
-        border-bottom: 1px dashed #e0e0e0;
-      }
-
-      .special-grid {
-        flex-direction: column;
-      }
-
-      .single-column-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .price-table-container {
-        width: calc(100% - 40px);
-      }
-
-      .special-items {
-        width: 100%;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -687,10 +686,10 @@
       priceContainer.className = 'price-container';
       const subsidyPrice = document.createElement('div');
       subsidyPrice.className = 'price subsidy';
-      subsidyPrice.textContent = isBreakfastOrSnack ? '₹ 18' : '₹ 50';
+      subsidyPrice.textContent = '₹ 18';
       const commercialPrice = document.createElement('div');
       commercialPrice.className = 'price commercial';
-      commercialPrice.textContent = isBreakfastOrSnack ? '₹ 30' : '₹ 60';
+      commercialPrice.textContent = '₹ 30';
       priceContainer.appendChild(subsidyPrice);
       priceContainer.appendChild(commercialPrice);
       content.appendChild(name);
@@ -739,11 +738,11 @@
       priceContainer.style.marginLeft = '10px';
 
       const subsidyPrice = document.createElement('div');
-      subsidyPrice.className = 'price subsidy';
+      subsidyPrice.className = 'price subsidy price-lunch-dinner';
       subsidyPrice.textContent = '₹ 50';
 
       const commercialPrice = document.createElement('div');
-      commercialPrice.className = 'price commercial';
+      commercialPrice.className = 'price commercial price-lunch-dinner';
       commercialPrice.textContent = '₹ 60';
 
       priceContainer.appendChild(subsidyPrice);
@@ -781,7 +780,7 @@
       // Morning Breakfast subsection
       const morningBreakfast = document.createElement('div');
       morningBreakfast.className = 'subsection';
-      morningBreakfast.innerHTML = '<h3>Morning Breakfast</h3>';
+      morningBreakfast.innerHTML = '<h3>Morning Breakfast &#127861;</h3>';
       const breakfastItems = document.createElement('div');
       breakfastItems.className = 'items-grid';
       if (menuData.breakfastItems) {
@@ -794,7 +793,7 @@
       // Evening Snacks subsection
       const eveningSnacks = document.createElement('div');
       eveningSnacks.className = 'subsection';
-      eveningSnacks.innerHTML = '<h3>Evening Snacks</h3>';
+      eveningSnacks.innerHTML = '<h3>Evening Snacks &#127839;</h3>';
       const snacksItems = document.createElement('div');
       snacksItems.className = 'items-grid';
       if (menuData.snacksItems) {
