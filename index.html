@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Canteen Menu</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    html,
+    body {
+      height: 100%;
+      background-color: #f8f9fa;
+      padding: 0;
+      margin: 0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 98%;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background-color: #4a6fdc;
+      color: white;
+      padding: 2px 0 15px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .price-table-container {
+      margin: 20px;
+      padding: 15px;
+      background-color: #f0f4ff;
+      border-radius: 8px;
+      width: calc(100% - 40px);
+      box-sizing: border-box;
+      flex-shrink: 0;
+    }
+
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .price-table th,
+    .price-table td {
+      padding: 10px 15px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .price-table th {
+      background-color: #e8eeff;
+      font-weight: 600;
+      color: #4a6fdc;
+      font-size: 1rem;
+    }
+
+    .price-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .price-table .price-value {
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .price-table .subsidy-price {
+      color: #2e7d32;
+    }
+
+    .price-table .commercial-price {
+      color: #e65100;
+    }
+
+    .menu-content-wrapper {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 20px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-container {
+      display: flex;
+      flex-wrap: nowrap;
+      padding: 0;
+      flex: 1;
+    }
+
+    .menu-section {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .breakfast-section {
+      flex: 0 0 40%;
+    }
+
+    .lunch-dinner-section {
+      flex: 0 0 58%;
+    }
+
+    .lunch-dinner-content {
+      display: flex;
+      flex: 1;
+    }
+
+    .lunch-column,
+    .dinner-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    .lunch-column {
+      border-right: 1px dashed #e0e0e0;
+    }
+
+    .section-header {
+      background-color: #f0f4ff;
+      padding: 10px;
+      border-bottom: 1px solid #e0e0e0;
+      flex-shrink: 0;
+    }
+
+    .section-header h2 {
+      color: blue;
+      font-size: 1.5rem;
+    }
+
+    .subsection {
+      padding: 10px;
+      border-bottom: 1px dashed #e0e0e0;
+      flex: 1;
+    }
+
+    .subsection:last-child {
+      border-bottom: none;
+    }
+
+    .subsection h3 {
+      color: #555;
+      margin-bottom: 15px;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .subsection h3::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: #4a6fdc;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 100px;
+    }
+
+    .item-card {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .item-img {
+      width: 70%;
+      border-radius: 20px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .item-content {
+      padding: 12px 12px 0px;
+    }
+
+    .item-name {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .price-container {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.7rem;
+      margin: 10px 10px;
+    }
+
+    .price {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+      margin: 10px;
+    }
+
+    .subsidy {
+      background-color: #e6f7ee;
+      color: #2e7d32;
+    }
+
+    .commercial {
+      background-color: #fff3e0;
+      color: #e65100;
+    }
+
+    .special-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.lunch-section {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.dinner-section {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.horizontal-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.horizontal-list li {
+  margin-right: 15px;
+}
+
+    .loading {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #666;
+    }
+
+    /* Styles for single column layout in lunch/dinner */
+    .single-column-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .text-item-card {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .text-item-name {
+      font-weight: 600;
+      color: #333;
+    }
+    .special-items{
+      border: 1px solid brown;
+      border-radius: 20px;
+      box-sizing: border-box;
+      padding: 13px 0px;
+    }
+
+    .special-items h2{
+      color:blue;
+      text-decoration: underline;
+    }
+    .special-note{
+      color:Red
+    }
+    .special-category h3{
+      color:rgb(128, 31, 219)
+    }
+    .special-list{
+      color:brown;
+    }
+
+    @media (max-width: 768px) {
+      .menu-container {
+        flex-direction: column;
+      }
+
+      .breakfast-section,
+      .lunch-dinner-section {
+        flex: 1;
+        width: 100%;
+      }
+
+      .lunch-dinner-content {
+        flex-direction: column;
+      }
+
+      .lunch-column {
+        border-right: none;
+        border-bottom: 1px dashed #e0e0e0;
+      }
+
+      .special-grid {
+        flex-direction: column;
+      }
+
+      .single-column-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .price-table-container {
+        width: calc(100% - 40px);
+      }
+
+      .special-items {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 id="menu-title">Loading Menu...</h1>
+      <p id="current-date"></p>
+    </div>
+    <div class="menu-content-wrapper">
+      <div id="menu-content" class="loading">
+        Loading today's menu...
+      </div>
+    </div>
+  </div>
+  <script>
+    // Menu data
+    const weeklyMenu = {
+      Sunday: {
+        breakfastItems: [
+          {
+            name: "Dosa Variety (Coconut Chutney + Sambhar)",
+            img: "https://vismaifood.com/storage/app/uploads/public/8b4/19e/427/thumb__1200_0_0_0_auto.jpg",
+          },
+        ],
+        snacksItems: [
+          {
+            name: "Rolls (Variety)",
+            img: "https://i.ytimg.com/vi/CXh7VQE5mlY/maxresdefault.jpg",
+          },
+        ],
+        lunch: [
+          "Bhandara Aloo",
+          "Veg Tawa Dry",
+          "Puri",
+          "Moong Dal Tadka",
+          "Plane Rice",
+          "Salad (Cucumber, Carrot, Onion)",
+          "Fry Papad",
+          "Boondi Raita",
+        ],
+        dinner: [
+          "Avial",
+          "Lauki + Chana Dal Fry",
+          "Chapati",
+          "Dal Fry",
+          "Rice",
+          "Veg Hot and Sour",
+          "Curd, Pickle",
+          "Papad",
+        ],
+      },
+      Monday: {
+        breakfastItems: [
+          { name: "Poha (Coconut Chutney)", img: "https://www.indianhealthyrecipes.com/wp-content/uploads/2020/01/poha.jpg" },
+          { name: "Mix Veg Paratha (Curd)", img: "https://static1.squarespace.com/static/5d10b2995d7640000181db5d/5d10b72f45897f000114d12c/5f1dc8ef33dc544479241cb9/1672429716226/9BED1EDC-BBCD-46C7-B749-7CBFDA6AEF10.jpeg?format=1500w" },
+        ],
+        snacksItems: [
+          { name: "Pav Bhaji", img: "https://www.cubesnjuliennes.com/wp-content/uploads/2020/07/Instant-Pot-Mumbai-Pav-Bhaji-Recipe.jpg" },
+          { name: "Corn Chat", img: "https://www.cookrepublic.com/wp-content/uploads/2024/02/corn-chaat-masala.jpg" },
+        ],
+        lunch: [
+          "Chana Masala",
+          "Cabbage Tomato",
+          "Chapati",
+          "Dal Tadka",
+          "Rice / Jeera Rice",
+          "Salad (Cucumber, Carrot, Onion)",
+          "Roasted Papad",
+          "Curd, Pickle",
+        ],
+        dinner: [
+          "Shahi Paneer",
+          "Gajar Methi",
+          "Chapati",
+          "Dal Panchratna",
+          "Rice",
+          "Pumpkin + Carrot",
+          "Raita",
+          "Fry Papad",
+        ],
+      },
+      Tuesday: {
+        breakfastItems: [
+          {
+            name: "Idli / Medu Vada (Coconut Chutney)",
+            img: "https://media.istockphoto.com/id/667898496/photo/idli-medu-vada-vadai-south-indian-breakfast.jpg?s=612x612&w=0&k=20&c=Nm-fOrmcaRi1RcCGjhHtY1PZFEkM-UyWaUQoAf9EQ1Q=",
+          },
+          {
+            name: "Veg Upma (Sambhar)",
+            img: "https://i0.wp.com/kalimirchbysmita.com/wp-content/uploads/2015/04/Vegetable_Upma_1435-11-1024x644-1024x644.jpg?resize=1024%2C644",
+          },
+        ],
+        snacksItems: [
+          {
+            name: "Vada Pav",
+            img: "https://i.ytimg.com/vi/8HQFc64OwUk/maxresdefault.jpg",
+          },
+          {
+            name: "Veg Hakka Noodle",
+            img: "https://www.ohmyveg.co.uk/wp-content/uploads/2024/08/hakka-noodles.jpg",
+          },
+        ],
+        lunch: [
+          "Veg Shahi Kurma",
+          "Bhendi Fry",
+          "Chapati",
+          "Dal Fry",
+          "Rice",
+          "Roasted Papad",
+          "Curd, Pickle",
+          "Salad",
+        ],
+        dinner: [
+          "Veg Jalfrezi",
+          "Baigan Bharela",
+          "Chapati",
+          "Masoor Dal",
+          "Rice",
+          "Tomato Soup",
+          "Curd, Pickle",
+          "Fry Papad",
+        ],
+      },
+      Wednesday: {
+        breakfastItems: [
+          {
+            name: "Sabudana Khichdi (Sweet Curd)",
+            img: "https://images.news18.com/ibnkhabar/uploads/2023/02/sabudana-khichdi.jpg",
+          },
+          {
+            name: "Besan Chilla (Green Chutney)",
+            img: "https://static.toiimg.com/thumb/59387461.cms?imgsize=271650&width=800&height=800",
+          },
+        ],
+        snacksItems: [
+          {
+            name: "Corn Cutlet (Aloo)",
+            img: "https://www.nehascookbook.com/wp-content/uploads/2022/09/Corn-pattice-WS-1-500x375.jpg",
+          },
+          {
+            name: "Bhelpuri",
+            img: "https://www.awesomecuisine.com/wp-content/uploads/2007/11/bhel-puri.jpg",
+          },
+        ],
+        lunch: [
+          "Veg Kolhapuri",
+          "Gobi Mutter Dry",
+          "Paratha",
+          "Moong Dal Fry",
+          "Plane Rice",
+          "Salad (Cucumber, Carrot, Onion)",
+          "Fryums",
+          "Curd, Pickle",
+        ],
+        dinner: [
+          "Methi Malai Matar",
+          "Beetroot Poriyal",
+          "Chapati",
+          "Mix Dal",
+          "Rice",
+          "Lemon Corriander Soup",
+          "Curd, Pickle",
+          "Roasted Papad",
+        ],
+        specialItems: {
+          lunch: ["Paneer Biryani", "Chicken Dum Biryani"],
+          dinner: ["Egg Tawa Masala", "Paneer Kadhai"],
+        },
+      },
+      Thursday: {
+        breakfastItems: [
+          {
+            name: "Veg Masala Dalia",
+            img: "https://darsa-organics.com/cdn/shop/articles/wheat-dalia.jpg?v=1701753594",
+          },
+          {
+            name: "Dosa (Masala / Sada)",
+            img: "https://i0.wp.com/binjalsvegkitchen.com/wp-content/uploads/2015/12/Masala-Dosa-L1.jpg?resize=600%2C900&ssl=1",
+          },
+        ],
+        snacksItems: [
+          {
+            name: "Bread Pakoda (Mitha Chutney)",
+            img: "https://c.ndtvimg.com/2023-07/iv4mofd_bread-pakoda_625x300_14_July_23.jpg?im=FaceCrop,algorithm=dnn,width=1200,height=738",
+          },
+          {
+            name: "Dhokla (Green Chutney)",
+            img: "https://images.aws.nestle.recipes/original/00df819a83753f67b270520205ee93ad_khaman_dhokla_recipe.jpeg",
+          },
+        ],
+        lunch: [
+          "Chole Bhature",
+          "Mixed Veg Dry",
+          "Bhature",
+          "Dal Makhani",
+          "Peas Pulao",
+          "Salad (Cucumber, Carrot, Onion)",
+          "Papad",
+          "Raita",
+        ],
+        dinner: [
+          "Veg Hyderabadi Masala",
+          "Matki Aloo Dry",
+          "Chapati",
+          "Moong Dal Fry",
+          "Rice",
+          "Veg Minestrone",
+          "Raita",
+          "Papad",
+        ],
+        specialItems: {
+          dinner: ["Chicken Kosha"],
+        },
+      },
+      Friday: {
+        breakfastItems: [
+          {
+            name: "Aloo Paneer Paratha (Curd)",
+            img: "https://i.ytimg.com/vi/Zs6Lb2d7Ed4/maxresdefault.jpg",
+          },
+          {
+            name: "Misal Pav",
+            img: "https://imgmediagumlet.lbb.in/media/2021/03/605ae93c24c90e249ad9b93b_1616570684551.jpg",
+          },
+        ],
+        snacksItems: [
+          {
+            name: "Rasam Vada",
+            img: "https://brassy.in/ammachiidlydosai/wp-content/uploads/2023/01/Rasam-vada.jpg",
+          },
+          {
+            name: "Black Chana Chaat",
+            img: "https://www.chefkunalkapur.com/wp-content/uploads/2024/02/YT-2023-Thumbnails-2.png?v=1706977457",
+          },
+        ],
+        lunch: [
+          "Rajma Masala",
+          "Beans + Coconut Dry",
+          "Chapati",
+          "Dal Tadka",
+          "Plane Rice",
+          "Salad (Cucumber, Carrot, Onion)",
+          "Roasted Papad",
+          "Curd",
+        ],
+        dinner: [
+          "Soyabean Masala",
+          "Bhendi Do Payza",
+          "Chapati",
+          "Dalma",
+          "Rice",
+          "Veg Manchao",
+          "Curd",
+          "Papad",
+        ],
+        specialItems: {
+          dinner: ["Fish Curry"],
+        },
+      },
+      Saturday: {
+        breakfastItems: [
+          {
+            name: "Moong Chila (Tomato Chutney)",
+            img: "https://www.funfoodfrolic.com/wp-content/uploads/2021/08/Dal-Cheela-Thumbnail.jpg",
+          },
+          {
+            name: "Semiya Upma (Coconut Chutney)",
+            img: "https://cookingfromheart.com/wp-content/uploads/2022/05/Vermicelli-Upma-Recipe.jpg",
+          },
+        ],
+        snacksItems: [
+          {
+            name: "Samosa (Green + Mitha Chutney)",
+            img: "https://img-cdn.publive.online/fit-in/1200x675/sanjeev-kapoor/media/post_banners/c78dadf87df1a0d0a08bcb3e9f2267997ed90e6d27e8e8fdc924bac6c2ec3694.JPG",
+          },
+          {
+            name: "Aloo Tikki Chat",
+            img: "https://www.honeywhatscooking.com/wp-content/uploads/2020/10/Aloo-Tikki-Chaat61.jpg",
+          },
+        ],
+        lunch: [
+          "Paneer Butter Masala",
+          "Tendli Dry (South Indian)",
+          "Arhar Dal",
+          "Plane Rice",
+          "Salad (Cucumber, Carrot, Onion)",
+          "Fry Papad",
+          "Veg Raita",
+        ],
+        dinner: [
+          "Mushroom Handi",
+          "Padwai Dry",
+          "Chapati",
+          "Dal Kolhapur",
+          "Rice",
+          "Palak Soup",
+          "Boondi Raita",
+          "Papad",
+        ],
+        specialItems: {
+          dinner: ["Chicken Chilly", "Paneer Chilly"],
+        },
+      },
+    };
+    // Function to get current day name
+    function getCurrentDayName() {
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const today = new Date();
+      return days[today.getDay()];
+    }
+    // Function to format date
+    function formatDate(date) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return date.toLocaleDateString(undefined, options);
+    }
+    // Function to create item card for breakfast/snacks (with image)
+    function createItemCard(item, isBreakfastOrSnack = true) {
+      const card = document.createElement('div');
+      card.className = 'item-card';
+      const img = document.createElement('img');
+      img.className = 'item-img';
+      img.src = isBreakfastOrSnack ? item.img : `https://picsum.photos/seed/${encodeURIComponent(item)}/300/200.jpg`;
+      img.alt = item.name || item;
+      const content = document.createElement('div');
+      content.className = 'item-content';
+      const name = document.createElement('div');
+      name.className = 'item-name';
+      name.textContent = item.name || item;
+      const priceContainer = document.createElement('div');
+      priceContainer.className = 'price-container';
+      const subsidyPrice = document.createElement('div');
+      subsidyPrice.className = 'price subsidy';
+      subsidyPrice.textContent = isBreakfastOrSnack ? '₹ 18' : '₹ 50';
+      const commercialPrice = document.createElement('div');
+      commercialPrice.className = 'price commercial';
+      commercialPrice.textContent = isBreakfastOrSnack ? '₹ 30' : '₹ 60';
+      priceContainer.appendChild(subsidyPrice);
+      priceContainer.appendChild(commercialPrice);
+      content.appendChild(name);
+      content.appendChild(priceContainer);
+      card.appendChild(img);
+      card.appendChild(content);
+      return card;
+    }
+    // Function to create text-only item card for lunch/dinner (without prices)
+    function createTextItemCard(item) {
+      const card = document.createElement('div');
+      card.className = 'text-item-card';
+      const name = document.createElement('div');
+      name.className = 'text-item-name';
+      name.textContent = item;
+      card.appendChild(name);
+      return card;
+    }
+    // Function to create heading with price
+    function createHeadingWithPrice(title, isLunch = true) {
+      const headingContainer = document.createElement('div');
+      headingContainer.style.display = 'flex';
+      headingContainer.style.justifyContent = 'space-between';
+      headingContainer.style.alignItems = 'center';
+      headingContainer.style.width = '100%';
+
+      const heading = document.createElement('h3');
+      heading.style.margin = '0';
+      heading.style.display = 'flex';
+      heading.style.alignItems = 'center';
+
+      const dot = document.createElement('span');
+      dot.style.display = 'inline-block';
+      dot.style.width = '8px';
+      dot.style.height = '8px';
+      dot.style.backgroundColor = '#4a6fdc';
+      dot.style.borderRadius = '50%';
+      dot.style.marginRight = '10px';
+
+      const titleText = document.createTextNode(title);
+      heading.appendChild(dot);
+      heading.appendChild(titleText);
+
+      const priceContainer = document.createElement('div');
+      priceContainer.className = 'price-container';
+      priceContainer.style.marginLeft = '10px';
+
+      const subsidyPrice = document.createElement('div');
+      subsidyPrice.className = 'price subsidy';
+      subsidyPrice.textContent = '₹ 50';
+
+      const commercialPrice = document.createElement('div');
+      commercialPrice.className = 'price commercial';
+      commercialPrice.textContent = '₹ 60';
+
+      priceContainer.appendChild(subsidyPrice);
+      priceContainer.appendChild(commercialPrice);
+
+      headingContainer.appendChild(heading);
+      headingContainer.appendChild(priceContainer);
+
+      return headingContainer;
+    }
+    // Function to render menu
+    function renderMenu() {
+      const currentDay = getCurrentDayName();
+      const menuData = weeklyMenu[currentDay];
+      if (!menuData) {
+        document.getElementById('menu-content').innerHTML = '<div class="loading">Menu not available for today</div>';
+        return;
+      }
+      // Set title and date
+      document.getElementById('menu-title').textContent = `${currentDay} – Canteen Menu`;
+      document.getElementById('current-date').textContent = formatDate(new Date());
+      // Create main content container
+      const contentContainer = document.getElementById('menu-content');
+      contentContainer.innerHTML = '';
+      // Create menu container
+      const menuContainer = document.createElement('div');
+      menuContainer.className = 'menu-container';
+      // Breakfast/Snacks section (left side)
+      const breakfastSection = document.createElement('div');
+      breakfastSection.className = 'menu-section breakfast-section';
+      const breakfastHeader = document.createElement('div');
+      breakfastHeader.className = 'section-header';
+      breakfastHeader.innerHTML = '<h2>Breakfast / Snacks</h2>';
+      breakfastSection.appendChild(breakfastHeader);
+      // Morning Breakfast subsection
+      const morningBreakfast = document.createElement('div');
+      morningBreakfast.className = 'subsection';
+      morningBreakfast.innerHTML = '<h3>Morning Breakfast</h3>';
+      const breakfastItems = document.createElement('div');
+      breakfastItems.className = 'items-grid';
+      if (menuData.breakfastItems) {
+        menuData.breakfastItems.forEach(item => {
+          breakfastItems.appendChild(createItemCard(item, true));
+        });
+      }
+      morningBreakfast.appendChild(breakfastItems);
+      breakfastSection.appendChild(morningBreakfast);
+      // Evening Snacks subsection
+      const eveningSnacks = document.createElement('div');
+      eveningSnacks.className = 'subsection';
+      eveningSnacks.innerHTML = '<h3>Evening Snacks</h3>';
+      const snacksItems = document.createElement('div');
+      snacksItems.className = 'items-grid';
+      if (menuData.snacksItems) {
+        menuData.snacksItems.forEach(item => {
+          snacksItems.appendChild(createItemCard(item, true));
+        });
+      }
+      eveningSnacks.appendChild(snacksItems);
+      breakfastSection.appendChild(eveningSnacks);
+      menuContainer.appendChild(breakfastSection);
+      // Lunch/Dinner section (right side)
+      const lunchDinnerSection = document.createElement('div');
+      lunchDinnerSection.className = 'menu-section lunch-dinner-section';
+      const lunchDinnerHeader = document.createElement('div');
+      lunchDinnerHeader.className = 'section-header';
+      lunchDinnerHeader.innerHTML = '<h2>Lunch / Dinner</h2>';
+      lunchDinnerSection.appendChild(lunchDinnerHeader);
+      // Create lunch/dinner content container
+      const lunchDinnerContent = document.createElement('div');
+      lunchDinnerContent.className = 'lunch-dinner-content';
+      // Lunch column (left side of right section)
+      const lunchColumn = document.createElement('div');
+      lunchColumn.className = 'lunch-column';
+      const lunch = document.createElement('div');
+      lunch.className = 'subsection';
+
+      // Create lunch heading with prices
+      const lunchHeading = createHeadingWithPrice('Lunch', true);
+      lunch.appendChild(lunchHeading);
+
+      const lunchItems = document.createElement('div');
+      lunchItems.className = 'single-column-grid';
+      if (menuData.lunch) {
+        menuData.lunch.forEach(item => {
+          lunchItems.appendChild(createTextItemCard(item));
+        });
+      }
+      lunch.appendChild(lunchItems);
+      lunchColumn.appendChild(lunch);
+      lunchDinnerContent.appendChild(lunchColumn);
+      // Dinner column (right side of right section)
+      const dinnerColumn = document.createElement('div');
+      dinnerColumn.className = 'dinner-column';
+      const dinner = document.createElement('div');
+      dinner.className = 'subsection';
+
+      // Create dinner heading with prices
+      const dinnerHeading = createHeadingWithPrice('Dinner', false);
+      dinner.appendChild(dinnerHeading);
+
+      const dinnerItems = document.createElement('div');
+      dinnerItems.className = 'single-column-grid';
+      if (menuData.dinner) {
+        menuData.dinner.forEach(item => {
+          dinnerItems.appendChild(createTextItemCard(item));
+        });
+      }
+      dinner.appendChild(dinnerItems);
+      dinnerColumn.appendChild(dinner);
+      lunchDinnerContent.appendChild(dinnerColumn);
+      lunchDinnerSection.appendChild(lunchDinnerContent);
+      menuContainer.appendChild(lunchDinnerSection);
+      // Add menu container to content
+      contentContainer.appendChild(menuContainer);
+      // Special Items section (if available) - full width
+      if (menuData.specialItems) {
+        const specialSection = document.createElement('div');
+        specialSection.className = 'special-items';
+        const specialHeader = document.createElement('h2');
+        specialHeader.textContent = 'Special Items';
+        specialSection.appendChild(specialHeader);
+        const specialNote = document.createElement('div');
+        specialNote.className = 'special-note';
+        specialNote.textContent = 'Min 10 Pre-order required';
+        specialSection.appendChild(specialNote);
+        const specialGrid = document.createElement('div');
+        specialGrid.className = 'special-grid';
+
+        // Lunch special items
+        if (menuData.specialItems.lunch && menuData.specialItems.lunch.length > 0) {
+          const lunchSpecial = document.createElement('div');
+          lunchSpecial.className = 'special-category lunch-section';
+          const lunchSpecialHeader = document.createElement('h3');
+          lunchSpecialHeader.textContent = 'Lunch';
+          lunchSpecial.appendChild(lunchSpecialHeader);
+          const lunchSpecialList = document.createElement('ol');
+          lunchSpecialList.className = 'special-list horizontal-list';
+          menuData.specialItems.lunch.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            lunchSpecialList.appendChild(li);
+          });
+          lunchSpecial.appendChild(lunchSpecialList);
+          specialGrid.appendChild(lunchSpecial);
+        }
+
+        // Dinner special items
+        if (menuData.specialItems.dinner && menuData.specialItems.dinner.length > 0) {
+          const dinnerSpecial = document.createElement('div');
+          dinnerSpecial.className = 'special-category dinner-section';
+          const dinnerSpecialHeader = document.createElement('h3');
+          dinnerSpecialHeader.textContent = 'Dinner';
+          dinnerSpecial.appendChild(dinnerSpecialHeader);
+          const dinnerSpecialList = document.createElement('ol');
+          dinnerSpecialList.className = 'special-list horizontal-list';
+          menuData.specialItems.dinner.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            dinnerSpecialList.appendChild(li);
+          });
+          dinnerSpecial.appendChild(dinnerSpecialList);
+          specialGrid.appendChild(dinnerSpecial);
+        }
+
+        specialSection.appendChild(specialGrid);
+        contentContainer.appendChild(specialSection);
+      }
+    }
+    // Initialize menu on page load
+    document.addEventListener('DOMContentLoaded', renderMenu);
+  </script>
+</body>
+
+</html>
