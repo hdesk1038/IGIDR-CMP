@@ -1177,27 +1177,30 @@
     document.addEventListener('DOMContentLoaded', function () {
       renderMenu();
       // Slideshow functionality
+      let slideIndex = 0;
       const slides = document.querySelectorAll('.slide');
-      let currentSlide = 0;
-      function showSlide(index) {
-        // Hide all slides
-        slides.forEach(slide => {
-          slide.classList.remove('active');
-        });
-        // Show current slide
-        slides[index].classList.add('active');
 
-        // If this is the menu slide (index 0), re-render the menu
-        if (index === 0) {
-          renderMenu();
-        }
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.remove('active');
+          if (i === index) {
+            slide.classList.add('active');
+          }
+        });
       }
+
       function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
+        slideIndex = (slideIndex + 1) % slides.length;
+        showSlide(slideIndex);
+
+        // First slide waits 30s, others 7s
+        let delay = (slideIndex === 0) ? 30000 : 10000;
+        setTimeout(nextSlide, delay);
       }
-      // Start the slideshow
-      setInterval(nextSlide, 10000); // Change slide every 10 seconds
+
+      // Start slideshow
+      showSlide(slideIndex);
+      setTimeout(nextSlide, 30000); // first slide gets 30s initially
     });
   </script>
 </body>
