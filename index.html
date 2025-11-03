@@ -1191,13 +1191,13 @@
         showSlide(slideIndex);
 
         // First slide waits 30s, others 7s
-        let delay = (slideIndex === 0) ? 30000 : 10000;
+        let delay = (slideIndex === 0) ? 50000 : 7000;
         setTimeout(nextSlide, delay);
       }
 
       // Start slideshow
       showSlide(slideIndex);
-      setTimeout(nextSlide, 30000); // first slide gets 30s initially
+      setTimeout(nextSlide, 50000); // first slide gets 30s initially
     });
   </script>
 </body>
