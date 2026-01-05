@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Canteen Menu</title>
+    <style>
+        /* All your existing styles remain unchanged */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html,
+        body {
+            height: 99%;
+            box-sizing: border-box;
+            background-color: #f9f9f6;
+            color: #2b2b2b;
+        }
+
+        .container {
+            max-width: 99%;
+            margin: 4px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            background: linear-gradient(to right, #4a148c, #6a1b9a);
+            color: white;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 10px 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .nav-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .header p {
+            margin: 0px 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .price-table-container {
+            margin: 20px;
+            padding: 15px;
+            background-color: #f2f6ff;
+            border-radius: 8px;
+            width: calc(100% - 40px);
+            flex-shrink: 0;
+        }
+
+        .price-table th,
+        .price-table td {
+            padding: 10px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dcdde1;
+        }
+
+        .price-table th {
+            background-color: #ede7f6;
+            font-weight: 600;
+            color: #512da8;
+            font-size: 1rem;
+        }
+
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .price-table .price-value {
+            font-weight: 500;
+            text-align: right;
+        }
+
+        .price-table .subsidy-price {
+            color: #2e7d32;
+        }
+
+        .price-table .commercial-price {
+            color: #d84315;
+        }
+
+        .menu-content-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 10px 5px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-container {
+            display: flex;
+            flex-wrap: nowrap;
+            padding: 0;
+            flex: 1;
+        }
+
+        .menu-section {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin: 6px;
+            display: flex;
+            flex-direction: column;
+            background-color: #fefefe;
+        }
+
+        .breakfast-section {
+            flex: 0 0 38%;
+        }
+
+        .lunch-dinner-section {
+            flex: 0 0 61%;
+        }
+
+        .lunch-dinner-content {
+            display: flex;
+            flex: 1;
+        }
+
+        .lunch-column,
+        .dinner-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0px 10px 5px;
+        }
+
+        .lunch-column {
+            border-right: 1px dashed #ccc;
+        }
+
+        .section-header {
+            background-color: #f3e5f5;
+            padding: 8px;
+            border-bottom: 1px solid #d1c4e9;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            color: #6a1b9a;
+            font-size: 1.5rem;
+        }
+
+        .subsection {
+            padding: 5px 12px 10px;
+            border-bottom: 1px dashed #dcdde1;
+            flex: 1;
+        }
+
+        .subsection:last-child {
+            border-bottom: none;
+        }
+
+        .subsection h3 {
+            color: #37474f;
+            margin-bottom: 12px;
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .subsection h3::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #6a1b9a;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 60px;
+        }
+
+        .item-card {
+            padding-top: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.17);
+        }
+
+        .item-img {
+            width: 80%;
+            height: 175px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .item-content {
+            padding: 7px;
+        }
+
+        .item-name {
+            font-weight: 700;
+            font-size: 1.7rem;
+            margin-bottom: 8px;
+            color: #630000;
+        }
+
+        .price-container {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.6rem;
+            margin-top: 10px;
+        }
+
+        .price {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .subsidy {
+            background-color: #e0f7f0;
+            color: #00796b;
+        }
+
+        .commercial {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .special-grid {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .lunch-section {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .dinner-section {
+            flex: 1;
+            margin-left: 10px;
+        }
+
+        .horizontal-list {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            padding: 0;
+        }
+
+        .horizontal-list li {
+            margin-right: 15px;
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        .single-column-grid {
+            margin: 20px 0px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 17px;
+        }
+
+        .text-item-card {
+            background-color: #fafafa;
+            border-radius: 8px;
+            padding: 7px 10px;
+            box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.17);
+            display: flex;
+            align-items: center;
+        }
+
+        .text-item-name {
+            font-size: 1.9rem;
+            margin: auto;
+            font-weight: 600;
+            color: #580000;
+        }
+
+        .special-items {
+            border: 1px solid #ab47bc;
+            border-radius: 20px;
+            background-color: #fff3f9;
+            padding: 2px;
+        }
+
+        .special-items h2 {
+            color: #8e24aa;
+            text-decoration: underline;
+        }
+
+        .special-note {
+            color: #c62828;
+            font-weight: 500;
+        }
+
+        .special-category h3 {
+            color: #6a1b9a;
+        }
+
+        .special-list {
+            color: #4e342e;
+        }
+
+        .price-lunch-dinner {
+            margin: 0px 10px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-container {
+                flex-direction: column;
+            }
+
+            .breakfast-section,
+            .lunch-dinner-section {
+                flex: 1;
+                width: 100%;
+            }
+
+            .lunch-dinner-content {
+                flex-direction: column;
+            }
+
+            .lunch-column {
+                border-right: none;
+                border-bottom: 1px dashed #e0e0e0;
+            }
+
+            .special-grid {
+                flex-direction: column;
+            }
+
+            .single-column-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .price-table-container {
+                width: calc(100% - 40px);
+            }
+
+            .special-items {
+                width: 100%;
+            }
+        }
+
+        /* Feedback styles */
+        .feedback-container {
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            padding: 40px 30px;
+            position: relative;
+            margin: 0 auto;
+            height: 98%;
+            overflow-y: auto;
+        }
+
+        .feedback-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, #4a148c, #6a1b9a);
+        }
+
+        .feedback-container h1 {
+            color: #4a148c;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            font-size: 5rem;
+            color: #6a1b9a;
+            opacity: 0.8;
+        }
+
+        .feedback-container p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .email-container {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f3e5f5;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .email-label {
+            font-weight: 600;
+            color: #6a1b9a;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .email-link {
+            font-size: 1.8rem;
+            color: #4a148c;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .email-link:hover {
+            color: #6a1b9a;
+            text-decoration: underline;
+        }
+
+        .feedback-types {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feedback-type {
+            background-color: #f9f7fa;
+            border: 1px solid #e1bee7;
+            border-radius: 10px;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            color: #6a1b9a;
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+        }
+
+        .thank-you {
+            margin-top: 30px;
+            font-size: 1.3rem;
+            color: #4a148c;
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        @media (max-width: 768px) {
+            .feedback-container h1 {
+                font-size: 2rem;
+            }
+
+            .feedback-container {
+                padding: 30px 20px;
+            }
+
+            .icon {
+                font-size: 4rem;
+            }
+
+            .feedback-container p {
+                font-size: 1.1rem;
+            }
+
+            .email-link {
+                font-size: 1.5rem;
+            }
+
+            .feedback-types {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* New styles for slideshow */
+        .slideshow-container {
+            position: relative;
+            width: 98%;
+            height: 99vh;
+            margin: 4px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 0;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide-img {
+            width: 100%;
+            height: 99%;
+            object-fit: contain;
+            border-radius: 0;
+        }
+
+        /* Add fade transition effect */
+        .slide {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Slideshow Container -->
+    <div class="slideshow-container">
+        <div class="slide active">
+            <div class="container">
+                <div class="header">
+                    <button id="prev-day-btn" class="nav-button">&lt;&lt; Previous Day</button>
+                    <div>
+                        <h1 id="menu-title">Loading Menu...</h1>
+
+                    </div>
+                    <button id="next-day-btn" class="nav-button">Next Day &gt;&gt;</button>
+                </div>
+                <div class="menu-content-wrapper">
+                    <div id="menu-content" class="loading">
+                        Loading today's menu...
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <img class="slide-img" src="msc1.png" alt="Msc 1">
+        </div>
+        <div class="slide">
+            <img class="slide-img" src="msc2.png" alt="Msc 2">
+        </div>
+        <div class="slide">
+            <img class="slide-img" src="msc3.png" alt="Msc 3">
+        </div>
+        <div class="slide">
+            <img class="slide-img" src="spc1.png" alt="Spc 1">
+        </div>
+        <div class="slide">
+            <img class="slide-img" src="spc2.png" alt="Spc 2">
+        </div>
+        <div class="slide">
+            <div class="feedback-container">
+                <h1>Canteen Feedback & Suggestions</h1>
+
+                <div class="icon-container">
+                    <div><img src="qrCode.jpeg" alt="QR Code" width="160px" /></div>
+                </div>
+
+                <p>
+                    We value your feedback and suggestions! If you have any issues regarding the canteen menu,
+                    food quality, service, or any other matters, please don't hesitate to reach out to us.
+                </p>
+
+                <div class="email-container">
+                    <div class="email-label">Email us at:</div>
+                    <a href="mailto:canteen@igidr.ac.in" class="email-link">canteen@igidr.ac.in</a>
+                </div>
+
+                <div class="feedback-types">
+                    <div class="feedback-type">Menu Suggestions</div>
+                    <div class="feedback-type">Food Quality Issues</div>
+                    <div class="feedback-type">Service Feedback</div>
+                    <div class="feedback-type">General Suggestions</div>
+                </div>
+
+                <p>
+                    Your input helps us improve our services and provide better dining experiences for everyone.
+                    We encourage all members of the IGIDR community to share their thoughts and suggestions.
+                </p>
+
+                <div class="thank-you">
+                    Thank you for your valuable feedback!
+                </div>
+
+                <div class="footer">
+                    &copy; <span id="year"></span> Indira Gandhi Institute of Development Research (IGIDR) Canteen
+                    Services
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    <script>
+        // Menu data
+        const weeklyMenu = {
+            Monday: {
+                breakfastItems: [
+                    { name: "Poha", img: "https://www.mrishtanna.com/wp-content/uploads/2018/04/poha-indian-breakfast-recipe.jpg" },
+                    { name: "Aloo Peas Paratha", img: "https://i.ytimg.com/vi/QlBPhZbbku8/maxresdefault.jpg" },
+                ],
+                snacksItems: [
+                    { name: "Ragda Pattice", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKKWXrGC53apO-ZFDNpQ5QaN_mrakAqCDCLA&s" },
+                    { name: "Corn Chaat", img: "https://aartimadan.com/wp-content/uploads/2020/10/corn-chaat.jpg" },
+                ],
+                lunch: [
+                    "Chana Masala",
+                    "Aloo Gobhi",
+                    "Chapati",
+                    "Dal Tadka",
+                    "Jeera Rice",
+                    "Salad",
+                    "Roasted Papad",
+                    "Curd",
+                ],
+                dinner: [
+                    "Paneer Hyderabadi",
+                    "Moong Methi",
+                    "Paratha",
+                    "Dal Panchratna",
+                    "Steam Rice",
+                    "Salad",
+                    "Boondi Raita",
+                    "Roasted Papad",
+                ],
+                specialItems: {
+                    lunch: ["Paneer Biryani", "Chicken Dum Biryani"],
+                },
+            },
+
+            Tuesday: {
+                breakfastItems: [
+                    { name: "Semayi Upma", img: "https://shwetainthekitchen.com/wp-content/uploads/2021/05/Vermicelli-upma.jpg" },
+                    { name: "Misal Pav", img: "https://www.ohmyveg.co.uk/wp-content/uploads/2023/12/Misal-Pav-2-2-e1722869218662.jpg" },
+                ],
+                snacksItems: [
+                    { name: "White Penne Pasta", img: "https://www.indianveggiedelight.com/wp-content/uploads/2022/12/white-sauce-pasta-featured.jpg" },
+                    { name: "Moong Chaat", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaSW7kZ4kPO2b9kbPEhvkBNiFvtILL4vkGDA&s" },
+                ],
+                lunch: [
+                    "Aloo Soyabean",
+                    "Bhendi Do Pyaza",
+                    "Chapati",
+                    "Dal Fry",
+                    "Steam Rice",
+                    "Salad",
+                    "Roasted Papad",
+                    "Curd",
+                ],
+                dinner: [
+                    "Veg Kofta Curry",
+                    "Aloo Matki Dry",
+                    "Chapati",
+                    "Mix Dal",
+                    "Lemon Rice",
+                    "Salad",
+                    "Curd",
+                    "Roasted Papad",
+                ],
+                specialItems: {},
+            },
+
+            Wednesday: {
+                breakfastItems: [
+                    { name: "Upma", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRELgmukYOE7N8wf5mOcGD-p-QzVfsZa3piJg&s" },
+                    { name: "Puri Bhaji", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ19yKrr7YsXxYNiD0RTDHJBgXTCx65S6nqBw&s" },
+                ],
+                snacksItems: [
+                    { name: "Veg Cutlet", img: "https://www.indianhealthyrecipes.com/wp-content/uploads/2023/06/cutlet-recipe-veg-cutlet.jpg" },
+                    { name: "Bhel Puri", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZvMeuOIbE1yU3idYmqM5N8XpL-qFNWj6UGA&s" },
+                ],
+                lunch: [
+                    "Matki Watana Usal",
+                    "Veg Tawa",
+                    "Chapati",
+                    "Moong Dal Tadka",
+                    "Steam Rice",
+                    "Salad",
+                    "Roasted Papad",
+                    "Veg Raita",
+                ],
+                dinner: [
+                    "Mix Pulses Gravy",
+                    "Papaya Poriyal",
+                    "Chapati",
+                    "Bengali Tarkari",
+                    "Tomato Rice",
+                    "Salad",
+                    "Curd",
+                    "Roasted Papad",
+                ],
+                specialItems: {
+                    lunch: ["Kadhai Paneer", "Butter Chicken", "Laccha Paratha"],
+                },
+            },
+
+            Thursday: {
+                breakfastItems: [
+                    { name: "Sabudana Khichdi", img: "https://vegecravings.com/wp-content/uploads/2017/08/sabudana-khichdi-recipe-step-by-step-instructions-12.jpg" },
+                    { name: "Onion Uttapam", img: "https://i0.wp.com/www.chitrasfoodbook.com/wp-content/uploads/2018/02/onion-uthappam.jpg?ssl=1" },
+                ],
+                snacksItems: [
+                    { name: "Sev Puri", img: "https://www.spiceupthecurry.com/wp-content/uploads/2015/05/sev-puri-1.jpg" },
+                    { name: "Bread Pakoda", img: "https://static.toiimg.com/photo/84629641.cms" },
+                ],
+                lunch: [
+                    "Paneer Tikka Masala",
+                    "Gobhi Matar Dry",
+                    "Chapati",
+                    "Arhar Dal",
+                    "Steam Rice",
+                    "Salad",
+                    "Roasted Papad",
+                    "Curd",
+                ],
+                dinner: [
+                    "Black Chana Masala",
+                    "Gajar Matar",
+                    "Chapati",
+                    "Veg Moong Dal",
+                    "Steam Rice",
+                    "Salad",
+                    "Curd",
+                    "Roasted Papad",
+                ],
+                specialItems: {
+                    dinner: ["Egg Handi", "Fish Curry"],
+                },
+            },
+
+            Friday: {
+                breakfastItems: [
+                    { name: "Tomato Upma", img: "https://www.indianhealthyrecipes.com/wp-content/uploads/2022/07/tomato-upma-recipe.jpg" },
+                    { name: "Pineapple Shira", img: "https://aartimadan.com/wp-content/uploads/2024/08/Pineapple-Sheera-Halwa.jpg" },
+                ],
+                snacksItems: [
+                    { name: "Pav Bhaji", img: "https://www.secondrecipe.com/wp-content/uploads/2020/12/pav-bhaji-2020.jpg" },
+                    { name: "Kala Chana Chaat", img: "https://www.indianveggiedelight.com/wp-content/uploads/2022/01/kala-chana-chaat-recipe-featured.jpg" },
+                ],
+                lunch: [
+                    "Rajma Masala",
+                    "Dosa Bhaji",
+                    "Chapati",
+                    "Maa Ki Dal",
+                    "Steam Rice",
+                    "Salad",
+                    "Roasted Papad",
+                    "Curd",
+                ],
+                dinner: [
+                    "Corn Palak",
+                    "Aloo Shimla",
+                    "Chapati",
+                    "Veg Dalma",
+                    "Steam Rice",
+                    "Salad",
+                    "Curd",
+                    "Roasted Papad",
+                ],
+                specialItems: {
+                    dinner: ["Chicken Kosha", "Paneer 65"],
+                },
+            },
+
+            Saturday: {
+                breakfastItems: [
+                    { name: "Idli / Wada", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAcNRajbnfgiwhokJdTvZk52nVDnynPcogGA&s" },
+                    { name: "Mix Sprout", img: "https://uzhavarbumi.s3.ap-south-1.amazonaws.com/uploads/pgCpeVtJ4XQTxpWrS0wVsi2tDbsVLnrsgLSQ4d4e.jpg" },
+                ],
+                snacksItems: [
+                    { name: "Samosa", img: "https://www.indianhealthyrecipes.com/wp-content/uploads/2021/12/samosa-recipe.jpg" },
+                    { name: "Dahi Papdi Chaat", img: "https://www.whiskaffair.com/wp-content/uploads/2021/03/Dahi-Papdi-Chaat-2-3.jpg" },
+                ],
+                lunch: [
+                    "Pindi Chole",
+                    "Aloo Chatpata",
+                    "Bhatura",
+                    "Dal Tadka",
+                    "Peas Pulao",
+                    "Salad",
+                    "Roasted Papad",
+                    "Curd",
+                ],
+                dinner: [
+                    "Aloo Mater",
+                    "Baingan Bharta",
+                    "Chapati",
+                    "Masoor Dal",
+                    "Steam Rice",
+                    "Salad",
+                    "Curd",
+                    "Roasted Papad",
+                ],
+                specialItems: {
+                    dinner: ["Gajar Halwa", "Sevai Kheer"],
+                },
+            },
+
+            Sunday: {
+                breakfastItems: [
+                    { name: "Dosa (Variety)", img: "https://www.indianhealthyrecipes.com/wp-content/uploads/2016/09/dosa-recipes.webp" },
+                ],
+                snacksItems: [
+                    { name: "Veg Hakka Noodles", img: "https://www.indianhealthyrecipes.com/wp-content/uploads/2021/07/hakka-noodles-recipe.jpg" },
+                    { name: "Pani Puri", img: "https://www.awesomecuisine.com/wp-content/uploads/2007/11/Pani-Puri.jpg" },
+                ],
+                lunch: [
+                    "Garlic Mushroom Matar",
+                    "Aloo Palak Saag",
+                    "Chapati",
+                    "Dal Lasuni",
+                    "Steam Rice",
+                    "Salad",
+                    "Roasted Papad",
+                    "Curd",
+                ],
+                dinner: [
+                    "Veg Manchurian Gravy",
+                    "Bhendi Tomato",
+                    "Chapati",
+                    "Dal Kolhapuri",
+                    "Veg Fried Rice",
+                    "Kachumber Salad",
+                    "Curd",
+                    "Fryums",
+                ],
+                specialItems: {
+                    lunch: ["Chicken Koliwada", "Paneer Peshawari"],
+                },
+            },
+        };
+
+        // Function to get current day name
+        function getCurrentDayName() {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const today = new Date();
+            return days[today.getDay()];
+        }
+        // Function to format date
+        function formatDate(date) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString(undefined, options);
+        }
+        // Function to create item card for breakfast/snacks (with image)
+        function createItemCard(item, isBreakfastOrSnack = true) {
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            const img = document.createElement('img');
+            img.className = 'item-img';
+            img.src = isBreakfastOrSnack ? item.img : `https://picsum.photos/seed/${encodeURIComponent(item)}/300/200.jpg`;
+            img.alt = item.name || item;
+            const content = document.createElement('div');
+            content.className = 'item-content';
+            const name = document.createElement('div');
+            name.className = 'item-name';
+            name.textContent = item.name || item;
+            const priceContainer = document.createElement('div');
+            priceContainer.className = 'price-container';
+            const subsidyPrice = document.createElement('div');
+            subsidyPrice.className = 'price subsidy';
+            subsidyPrice.textContent = '₹ 18';
+            const commercialPrice = document.createElement('div');
+            commercialPrice.className = 'price commercial';
+            commercialPrice.textContent = '₹ 30';
+            priceContainer.appendChild(subsidyPrice);
+            priceContainer.appendChild(commercialPrice);
+            content.appendChild(name);
+            content.appendChild(priceContainer);
+            card.appendChild(img);
+            card.appendChild(content);
+            return card;
+        }
+        // Function to create text-only item card for lunch/dinner (without prices)
+        function createTextItemCard(item) {
+            const card = document.createElement('div');
+            card.className = 'text-item-card';
+            const name = document.createElement('div');
+            name.className = 'text-item-name';
+            name.textContent = item;
+            card.appendChild(name);
+            return card;
+        }
+        // Function to create heading with price
+        function createHeadingWithPrice(title, isLunch = true) {
+            const headingContainer = document.createElement('div');
+            headingContainer.style.display = 'flex';
+            headingContainer.style.justifyContent = 'space-between';
+            headingContainer.style.alignItems = 'center';
+            headingContainer.style.width = '100%';
+            const heading = document.createElement('h3');
+            heading.style.margin = '0';
+            heading.style.display = 'flex';
+            heading.style.alignItems = 'center';
+            const dot = document.createElement('span');
+            dot.style.display = 'inline-block';
+            dot.style.width = '8px';
+            dot.style.height = '8px';
+            dot.style.backgroundColor = '#4a6fdc';
+            dot.style.borderRadius = '50%';
+            dot.style.marginRight = '10px';
+            const titleText = document.createTextNode(title);
+            heading.appendChild(dot);
+            heading.appendChild(titleText);
+            const priceContainer = document.createElement('div');
+            priceContainer.className = 'price-container';
+            priceContainer.style.marginLeft = '10px';
+            const subsidyPrice = document.createElement('div');
+            subsidyPrice.className = 'price subsidy price-lunch-dinner';
+            subsidyPrice.textContent = '₹ 50';
+            const commercialPrice = document.createElement('div');
+            commercialPrice.className = 'price commercial price-lunch-dinner';
+            commercialPrice.textContent = '₹ 60';
+            priceContainer.appendChild(subsidyPrice);
+            priceContainer.appendChild(commercialPrice);
+            headingContainer.appendChild(heading);
+            headingContainer.appendChild(priceContainer);
+            return headingContainer;
+        }
+        // Function to render menu
+        function renderMenu(dayName) {
+            const menuData = weeklyMenu[dayName];
+            if (!menuData) {
+                document.getElementById('menu-content').innerHTML = '<div class="loading">Menu not available for today</div>';
+                return;
+            }
+            // Set title and date
+            document.getElementById('menu-title').textContent = `${dayName} – Canteen Menu`;
+            // Create main content container
+            const contentContainer = document.getElementById('menu-content');
+            contentContainer.innerHTML = '';
+            // Create menu container
+            const menuContainer = document.createElement('div');
+            menuContainer.className = 'menu-container';
+            // Breakfast/Snacks section (left side)
+            const breakfastSection = document.createElement('div');
+            breakfastSection.className = 'menu-section breakfast-section';
+            const breakfastHeader = document.createElement('div');
+            breakfastHeader.className = 'section-header';
+            breakfastHeader.innerHTML = '<h2>Breakfast / Snacks</h2>';
+            breakfastSection.appendChild(breakfastHeader);
+            // Morning Breakfast subsection
+            const morningBreakfast = document.createElement('div');
+            morningBreakfast.className = 'subsection';
+            morningBreakfast.innerHTML = '<h3>Morning Breakfast &#127861;</h3>';
+            const breakfastItems = document.createElement('div');
+            breakfastItems.className = 'items-grid';
+            if (menuData.breakfastItems) {
+                menuData.breakfastItems.forEach(item => {
+                    breakfastItems.appendChild(createItemCard(item, true));
+                });
+            }
+            morningBreakfast.appendChild(breakfastItems);
+            breakfastSection.appendChild(morningBreakfast);
+            // Evening Snacks subsection
+            const eveningSnacks = document.createElement('div');
+            eveningSnacks.className = 'subsection';
+            eveningSnacks.innerHTML = '<h3>Evening Snacks &#127839;</h3>';
+            const snacksItems = document.createElement('div');
+            snacksItems.className = 'items-grid';
+            if (menuData.snacksItems) {
+                menuData.snacksItems.forEach(item => {
+                    snacksItems.appendChild(createItemCard(item, true));
+                });
+            }
+            eveningSnacks.appendChild(snacksItems);
+            breakfastSection.appendChild(eveningSnacks);
+            menuContainer.appendChild(breakfastSection);
+            // Lunch/Dinner section (right side)
+            const lunchDinnerSection = document.createElement('div');
+            lunchDinnerSection.className = 'menu-section lunch-dinner-section';
+            const lunchDinnerHeader = document.createElement('div');
+            lunchDinnerHeader.className = 'section-header';
+            lunchDinnerHeader.innerHTML = '<h2>Lunch / Dinner</h2>';
+            lunchDinnerSection.appendChild(lunchDinnerHeader);
+            // Create lunch/dinner content container
+            const lunchDinnerContent = document.createElement('div');
+            lunchDinnerContent.className = 'lunch-dinner-content';
+            // Lunch column (left side of right section)
+            const lunchColumn = document.createElement('div');
+            lunchColumn.className = 'lunch-column';
+            const lunch = document.createElement('div');
+            lunch.className = 'subsection';
+            // Create lunch heading with prices
+            const lunchHeading = createHeadingWithPrice('Lunch', true);
+            lunch.appendChild(lunchHeading);
+            const lunchItems = document.createElement('div');
+            lunchItems.className = 'single-column-grid';
+            if (menuData.lunch) {
+                menuData.lunch.forEach(item => {
+                    lunchItems.appendChild(createTextItemCard(item));
+                });
+            }
+            lunch.appendChild(lunchItems);
+            lunchColumn.appendChild(lunch);
+            lunchDinnerContent.appendChild(lunchColumn);
+            // Dinner column (right side of right section)
+            const dinnerColumn = document.createElement('div');
+            dinnerColumn.className = 'dinner-column';
+            const dinner = document.createElement('div');
+            dinner.className = 'subsection';
+            // Create dinner heading with prices
+            const dinnerHeading = createHeadingWithPrice('Dinner', false);
+            dinner.appendChild(dinnerHeading);
+            const dinnerItems = document.createElement('div');
+            dinnerItems.className = 'single-column-grid';
+            if (menuData.dinner) {
+                menuData.dinner.forEach(item => {
+                    dinnerItems.appendChild(createTextItemCard(item));
+                });
+            }
+            dinner.appendChild(dinnerItems);
+            dinnerColumn.appendChild(dinner);
+            lunchDinnerContent.appendChild(dinnerColumn);
+            lunchDinnerSection.appendChild(lunchDinnerContent);
+            menuContainer.appendChild(lunchDinnerSection);
+            // Add menu container to content
+            contentContainer.appendChild(menuContainer);
+            // Special Items section (if available) - full width
+            if (menuData.specialItems) {
+                const specialSection = document.createElement('div');
+                specialSection.className = 'special-items';
+                const table = document.createElement('table');
+                table.style.width = '100%';
+                table.style.borderRadius = '20px';
+                table.style.borderCollapse = 'collapse';
+                table.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                const headerRow = document.createElement('tr');
+                const titleCell = document.createElement('th');
+                titleCell.textContent = 'Special Items :';
+                titleCell.colSpan = 1;
+                titleCell.style.background = '#f3e5f5';
+                titleCell.style.color = '#6a1b9a';
+                titleCell.style.borderRadius = '20px';
+                titleCell.style.fontSize = '1.1rem';
+                titleCell.style.padding = '1px';
+                const lunchHeader = document.createElement('th');
+                lunchHeader.textContent = 'Lunch';
+                lunchHeader.style.background = '#ede7f6';
+                lunchHeader.style.borderRadius = '20px';
+                lunchHeader.style.fontSize = '1.1rem';
+                lunchHeader.style.padding = '12px';
+                const dinnerHeader = document.createElement('th');
+                dinnerHeader.textContent = 'Dinner';
+                dinnerHeader.style.background = '#e8eaf6';
+                dinnerHeader.style.borderRadius = '20px';
+                dinnerHeader.style.fontSize = '1.1rem';
+                dinnerHeader.style.padding = '12px';
+                headerRow.appendChild(titleCell);
+                headerRow.appendChild(lunchHeader);
+                headerRow.appendChild(dinnerHeader);
+                const contentRow = document.createElement('tr');
+                const noteCell = document.createElement('td');
+                noteCell.textContent = 'Min 10 Pre-order required';
+                noteCell.style.fontWeight = 'bold';
+                noteCell.style.color = 'red';
+                noteCell.style.padding = '7px';
+                const lunchSpecialItems = document.createElement('td');
+                lunchSpecialItems.style.padding = '7px';
+                lunchSpecialItems.style.fontSize = '0.95rem';
+                lunchSpecialItems.style.color = '#333';
+                lunchSpecialItems.style.lineHeight = '1.6';
+                if (menuData.specialItems.lunch) {
+                    lunchSpecialItems.innerHTML = menuData.specialItems.lunch
+                        .map((item, index) => `${index + 1}. ${item}`)
+                        .join('<br>');
+                }
+                else {
+                    lunchSpecialItems.innerHTML = 'N/A'
+                }
+                const dinnerSpecialItems = document.createElement('td');
+                dinnerSpecialItems.style.padding = '7px';
+                dinnerSpecialItems.style.fontSize = '0.95rem';
+                dinnerSpecialItems.style.color = '#333';
+                dinnerSpecialItems.style.lineHeight = '1.6';
+                if (menuData.specialItems.dinner) {
+                    dinnerSpecialItems.innerHTML = menuData.specialItems.dinner
+                        .map((item, index) => `${index + 1}. ${item}`)
+                        .join('<br>');
+                }
+                else {
+                    dinnerSpecialItems.innerHTML = 'N/A'
+                }
+                contentRow.appendChild(noteCell);
+                contentRow.appendChild(lunchSpecialItems);
+                contentRow.appendChild(dinnerSpecialItems);
+                table.appendChild(headerRow);
+                table.appendChild(contentRow);
+                specialSection.appendChild(table);
+                document.getElementById('menu-content').appendChild(specialSection);
+            }
+        }
+        // Initialize menu on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentDay = getCurrentDayName();
+            renderMenu(currentDay);
+
+            // Navigation button functionality
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+            document.getElementById('prev-day-btn').addEventListener('click', function () {
+                const currentIndex = days.indexOf(currentDay);
+                const prevIndex = (currentIndex - 1 + days.length) % days.length;
+                currentDay = days[prevIndex];
+                renderMenu(currentDay);
+            });
+
+            document.getElementById('next-day-btn').addEventListener('click', function () {
+                const currentIndex = days.indexOf(currentDay);
+                const nextIndex = (currentIndex + 1) % days.length;
+                currentDay = days[nextIndex];
+                renderMenu(currentDay);
+            });
+
+            // Slideshow functionality
+            let slideIndex = 0;
+            const slides = document.querySelectorAll('.slide');
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active');
+                    if (i === index) {
+                        slide.classList.add('active');
+                    }
+                });
+            }
+
+            function nextSlide() {
+                slideIndex = (slideIndex + 1) % slides.length;
+                showSlide(slideIndex);
+
+                // First slide waits 30s, others 7s
+                let delay = (slideIndex === 0) ? 50000 : 7000;
+                setTimeout(nextSlide, delay);
+            }
+
+            // Start slideshow
+            showSlide(slideIndex);
+            setTimeout(nextSlide, 50000); // first slide gets 30s initially
+        });
+    </script>
+</body>
+
+</html>
