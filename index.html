@@ -638,339 +638,206 @@
     <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
     <script>
         // Menu data
-        const weeklyMenu = {
+const aprilMenu = {
     "Monday": {
         "breakfastItems": [
-            {
-                "name": "Onion Batata Poha",
-                "img": "https://www.indianhealthyrecipes.com/wp-content/uploads/2020/01/poha.jpg"
-            },
-            {
-                "name": "Veg Upma",
-                "img": "https://d1uz88p17r663j.cloudfront.net/original/ba32df908435796279e3d79f0d5fbdc1_Rava_Upma_-_Twist.jpg"
-            }
+            { "name": "Aloo Paneer Paratha", "img": "https://i.ytimg.com/vi/Vnbm8WYyhX0/maxresdefault.jpg" },
+            { "name": "Veg Upma", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXWHMTQDALTpyB8sxVUrmiTHqvoDWnd2VxNg&s" }
         ],
         "snacksItems": [
-            {
-                "name": "Bhel Puri",
-                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKyyF00sBq-rPoQLt6IIchD2skgKTBxPRUhA&s"
-            },
-            {
-                "name": "French Fries",
-                "img": "https://www.allrecipes.com/thmb/8_B6OD1w6h1V0zPi8KAGzD41Kzs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/50223-homemade-crispy-seasoned-french-fries-VAT-Beauty-4x3-789ecb2eaed34d6e879b9a93dd56a50a.jpg"
-            }
+            { "name": "Dahi Papdi Chaat", "img": "https://www.whiskaffair.com/wp-content/uploads/2021/03/Dahi-Papdi-Chaat-2-3.jpg" },
+            { "name": "Sabudana Vada", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBZVIx0V9F-vsH55pKfoiHSFdnPmUx1rrGRw&s" }
         ],
         "lunch": [
-            "Black Chana Sabji",
-            "Gobhi Achaari",
+            "Soyabean Aloo Gravy",
+            "Lauki Chana Dal",
             "Chapati",
             "Dal Tadka",
-            "Jeera Rice",
-            "Salad",
-            "Roasted Papad",
-            "Curd"
-        ],
-        "dinner": [
-            "Paneer Butter Masala",
-            "Gajar Matar Methi",
-            "Paratha",
-            "Dal Panchratna",
-            "Plain Rice",
-            "Salad",
-            "Curd",
-            "Roasted Papad"
-        ],
-        "specialItems": {
-            "lunch": [],
-            "dinner": [
-                "Chicken Kosha"
-            ]
-        }
-    },
-
-    "Tuesday": {
-        "breakfastItems": [
-            {
-                "name": "Ragi Uttapam",
-                "img": "https://img.clearcals.com/recipes/1a06039948abded9feb1414cb46f5f5e06ce893c/medium.png"
-            },
-            {
-                "name": "Pineapple Sheera",
-                "img": "https://aartimadan.com/wp-content/uploads/2024/08/Pineapple-Sheera-Halwa.jpg"
-            }
-        ],
-        "snacksItems": [
-            {
-                "name": "Samosa",
-                "img": "https://www.indianhealthyrecipes.com/wp-content/uploads/2021/12/samosa-recipe-500x375.jpg"
-            },
-            {
-                "name": "Dahi Papdi Chaat",
-                "img": "https://www.whiskaffair.com/wp-content/uploads/2021/03/Dahi-Papdi-Chaat-2-3.jpg"
-            }
-        ],
-        "lunch": [
-            "Veg Kofta",
-            "Soyabean Aloo Dry",
-            "Chapati",
-            "Chana Dal Tadka",
             "Steam Rice",
             "Salad",
             "Roasted Papad",
             "Curd"
         ],
         "dinner": [
-            "Akkha Masoor Sabji",
-            "Moong Methi Dry",
+            "Paneer Butter Masala",
+            "Gajar Methi Matar",
             "Chapati",
-            "Dal Makhani",
-            "Plain Rice",
+            "Moong Dal Fry",
+            "Jeera Rice",
             "Salad",
             "Curd",
             "Roasted Papad"
         ],
         "specialItems": {
             "lunch": [],
-            "dinner": [
-                "Gajar Halwa",
-                "Paneer 65"
-            ]
+            "dinner": ["Chicken Kosha", "Shahi Tukda"]
         }
     },
 
-    "Wednesday": {
+    "Tuesday": {
         "breakfastItems": [
-            {
-                "name": "Whole Moong Dal Chilla",
-                "img": "https://holycowvegan.net/wp-content/uploads/2022/02/sprouted-moong-chilla-4.jpg"
-            },
-            {
-                "name": "Misal Pav",
-                "img": "https://www.ohmyveg.co.uk/wp-content/uploads/2023/12/Misal-Pav-2-2-e1722869218662-500x375.jpg"
-            }
+            { "name": "Aloo Chole Puri", "img": "https://i.ytimg.com/vi/NrheVUCgjDo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAdZow0D5VuD-xflnCNvkDUjREYUg" },
+            { "name": "Moong Dal Chilla", "img": "https://www.funfoodfrolic.com/wp-content/uploads/2021/08/Dal-Cheela-Thumbnail.jpg" }
         ],
         "snacksItems": [
-            {
-                "name": "Dabeli Pao",
-                "img": "https://www.indianhealthyrecipes.com/wp-content/uploads/2024/09/kutchi-dabeli.webp"
-            },
-            {
-                "name": "Bread Pakoda",
-                "img": "https://static.toiimg.com/photo/84629641.cms"
-            }
+            { "name": "Samosa", "img": "https://www.indianhealthyrecipes.com/wp-content/uploads/2021/12/samosa-recipe.jpg" },
+            { "name": "Chana Chaat", "img": "https://www.jcookingodyssey.com/wp-content/uploads/2013/06/kala-chana-chaat-4.jpg" }
         ],
         "lunch": [
-            "Besan Kadhi Pakora",
-            "Kurkuri Bhindi",
+            "Black Chana Sabji",
+            "Aloo Capsicum Masala",
             "Chapati",
-            "Arhar Dal",
-            "Plain Rice",
+            "Arhar Dal Tadka",
+            "Tawa Pulao",
             "Salad",
             "Roasted Papad",
             "Veg Raita"
         ],
         "dinner": [
-            "Aloo Dum",
+            "Lauki Kofta",
             "Veg Tawa Dry",
             "Chapati",
-            "Mix Dal",
-            "Lemon Rice",
+            "Dal Makhani",
+            "Steam Rice",
             "Salad",
             "Curd",
             "Roasted Papad"
         ],
         "specialItems": {
             "lunch": [],
-            "dinner": [
-                "Gulab Jamun",
-                "Soya Chaap"
-            ]
+            "dinner": ["Soya Chaap", "Angoori Jamun"]
         }
     },
 
-    "Thursday": {
+    "Wednesday": {
         "breakfastItems": [
-            {
-                "name": "Aloo Onion Paratha",
-                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuHfx1xrl8OHI3abON5qtaQkcqx52xqr_iWw&s"
-            },
-            {
-                "name": "Semayi Upma",
-                "img": "https://shwetainthekitchen.com/wp-content/uploads/2021/05/Vermicelli-upma.jpg"
-            },
+            { "name": "Onion Batata Poha", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHSbWRcPzYN8rkcLNtVwN3osFcFlMc7ij6ZA&s" },
+            { "name": "Ragi Uttapam", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAIIagljUC5zDc2x4UwSZ3kqx7aBdws8ytYA&s" }
         ],
         "snacksItems": [
-            {
-                "name": "Veg Cutlet",
-                "img": "https://www.cookwithmanali.com/wp-content/uploads/2021/04/Veg-Cutlet-500x500.jpg"
-            },
-            {
-                "name": "White Sauce Penne Pasta",
-                "img": "https://www.indianveggiedelight.com/wp-content/uploads/2022/12/white-sauce-pasta-featured.jpg"
-            }
+            { "name": "Ragada Pattice", "img": "https://www.whiskaffair.com/wp-content/uploads/2021/07/Ragda-Pattice-2-3.jpg" },
+            { "name": "Rasam Vada", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1yY440cnfWT-Ecfm-rSE1KdpsPo-UMCIPxw&s" }
         ],
         "lunch": [
-            "Paneer Tikka Masala",
-            "Aloo Beans Dry",
+            "Besan Kadhi Pakora",
+            "Gobhi Achari",
             "Chapati",
-            "Dal Makhani",
-            "Peas Pulao",
+            "Kali Masoor Dal",
+            "Steam Rice",
             "Salad",
             "Roasted Papad",
             "Curd"
         ],
         "dinner": [
-            "Lauki Chana Gravy",
-            "Aloo Palak Saag",
+            "Methi Malai Matar",
+            "Kaddu Masala Dry",
             "Chapati",
-            "Veg Moong Dal",
-            "Plain Rice",
+            "Chana Dal Tadka",
+            "Tomato Rice",
+            "Salad",
+            "Curd",
+            "Roasted Papad"
+        ],
+        "specialItems": {
+            "lunch": ["Chicken with Gravy"],
+            "dinner": ["Gajar Halwa", "Egg Handi"]
+        }
+    },
+
+    "Thursday": {
+        "breakfastItems": [
+            { "name": "Dosa (Masala & Plain)", "img": "https://myfoodstory.com/wp-content/uploads/2025/08/Dosa-Recipe-2.jpg" },
+            { "name": "Veg Daliya", "img": "https://www.cookwithmanali.com/wp-content/uploads/2022/08/Instant-Pot-Vegetable-Daliya-500x500.jpg" }
+        ],
+        "snacksItems": [
+            { "name": "Dhokla", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjz-LMM-aU5TEayTqiVD2boA2wvTc113D5MA&s" },
+            { "name": "Veg Cutlet", "img": "https://www.indianhealthyrecipes.com/wp-content/uploads/2023/06/cutlet-recipe-veg-cutlet.jpg" }
+        ],
+        "lunch": [
+            "Paneer Tikka Masala",
+            "Beans Coconut Dry",
+            "Paratha",
+            "Arhar Dal Tadka",
+            "Jeera Rice",
+            "Salad",
+            "Roasted Papad",
+            "Curd"
+        ],
+        "dinner": [
+            "Aloo Chole Masala",
+            "Bhindi Do Pyaza",
+            "Chapati",
+            "Dal Makhani",
+            "Steam Rice",
             "Salad",
             "Curd",
             "Roasted Papad"
         ],
         "specialItems": {
             "lunch": [],
-            "dinner": [
-                "Sevai Kheer"
-            ]
+            "dinner": ["Paneer Bhurji", "Gulab Jamun"]
         }
     },
 
     "Friday": {
         "breakfastItems": [
-            {
-                "name": "Dosa (Masala and Plain)",
-                "img": "https://www.indianhealthyrecipes.com/wp-content/uploads/2016/09/dosa-recipes.webp"
-            },
-            {
-                "name": "Mixed Sprouts (Moong)",
-                "img": "https://uzhavarbumi.s3.ap-south-1.amazonaws.com/uploads/pgCpeVtJ4XQTxpWrS0wVsi2tDbsVLnrsgLSQ4d4e.jpg"
-            }
+            { "name": "Aloo Onion Paratha", "img": "https://5.imimg.com/data5/SELLER/Default/2023/8/334319593/GI/HR/UX/96478487/aloo-pyaz-paratha.jpg" },
+            { "name": "Idli / Medu Vada", "img": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_960,w_960//InstamartAssets/idli_vada.webp" }
         ],
         "snacksItems": [
-            {
-                "name": "Masala Idli",
-                "img": "https://rashmisweets.in/wp-content/uploads/2024/07/Mini-Masala-Idli.png"
-            },
-            {
-                "name": "Chana Chaat",
-                "img": "https://foodtrails25.com/wp-content/uploads/2024/07/Chana-Chaat-recipe.jpg"
-            },
+            { "name": "Masala Idli", "img": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_960,w_960//InstamartAssets/Masala_Idli.webp" },
+            { "name": "Bhel Puri", "img": "https://www.indianveggiedelight.com/wp-content/uploads/2017/03/bhel-puri-featured.jpg" }
         ],
         "lunch": [
             "Rajma Gravy Sabji",
             "Veg Tawa Dry",
             "Chapati",
             "Dal Tadka",
-            "Plain Rice",
+            "Steam Rice",
             "Salad",
             "Roasted Papad",
             "Curd"
         ],
         "dinner": [
-            "Lauki Kofta",
-            "Karela Pyaaz Dry",
+            "Matar Chole",
+            "Kundru/Parval Masala",
             "Chapati",
-            "Masoor Dal",
-            "Plain Rice",
+            "Arhar Dal Tadka",
+            "Jeera Rice",
             "Salad",
             "Curd",
             "Roasted Papad"
         ],
         "specialItems": {
-            "lunch": [
-                "Paneer Biryani",
-                "Butter Chicken",
-                "Laccha Paratha"
-            ],
-            "dinner": [
-                "Chicken with Gravy"
-            ]
+            "lunch": ["Paneer Biryani", "Chicken Dum Biryani"],
+            "dinner": ["Sevai Kheer", "Paneer Peshawari"]
         }
     },
 
     "Saturday": {
         "breakfastItems": [
-            {
-                "name": "Aloo Paneer Paratha",
-                "img": "https://i.ytimg.com/vi/Vnbm8WYyhX0/maxresdefault.jpg"
-            },
-            {
-                "name": "Sabudana Khichdi",
-                "img": "https://www.indianhealthyrecipes.com/wp-content/uploads/2021/06/sabudana-khichdi-recipe.jpg"
-            }
+            { "name": "Sabudana Khichdi", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1Win_c0k7VsHv60laTst5uR3Gdo9xPM8yug&s" },
+            { "name": "Onion Uttapam", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR25bExlo45LjjwUU9y9e4y82HGJyFbOGd8A&s" }
         ],
         "snacksItems": [
-            {
-                "name": "Moong (Soaked) Chat",
-                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQM750uAaomBPv8jJL2eTbIqsVEVzexsYxzQ&s"
-            },
-            {
-                "name": "Pav Bhaji",
-                "img": "https://www.secondrecipe.com/wp-content/uploads/2020/12/pav-bhaji-2020.jpg"
-            }
+            { "name": "Penne Pasta", "img": "https://www.thereciperebel.com/wp-content/uploads/2024/01/chicken-penne-pasta-TRR-13-of-41.jpg" },
+            { "name": "Dahi Vada", "img": "https://ministryofcurry.com/wp-content/uploads/2016/08/Dahi-Vada-5.jpg" }
         ],
         "lunch": [
             "Amritsari Chole",
             "Aloo Chatpata",
             "Bhature",
             "Mix Dal Fry",
-            "Tawa Pulao",
-            "Salad",
-            "Roasted Papad",
-            "Curd"
-        ],
-        "dinner": [
-            "Mix Veg",
-            "Aloo Jeera",
-            "Chapati",
-            "Dal Khichdi",
-            "Plain Rice",
-            "Salad",
-            "Curd",
-            "Roasted Papad"
-        ],
-        "specialItems": {
-            "lunch": [],
-            "dinner": [
-                "Moong Dal Halwa"
-            ]
-        }
-    },
-
-    "Sunday": {
-        "breakfastItems": [
-            {
-                "name": "Dosa (Variety)",
-                "img": "https://www.indianhealthyrecipes.com/wp-content/uploads/2016/09/dosa-recipes.webp"
-            }
-        ],
-        "snacksItems": [
-            {
-                "name": "Veg Hakka Noodles",
-                "img": "https://shwetainthekitchen.com/wp-content/uploads/2020/07/IMG_0100.jpg"
-            },
-            {
-                "name": "Pani Puri",
-                "img": "https://www.awesomecuisine.com/wp-content/uploads/2007/11/Pani-Puri.jpg"
-            }
-        ],
-        "lunch": [
-            "Garlic Mushroom / Kadhai Paneer",
-            "Kaddu Dry",
-            "Chapati",
-            "Moong Dal Fry",
-            "Plain Rice",
+            "Peas Pulao",
             "Salad",
             "Roasted Papad",
             "Curd"
         ],
         "dinner": [
             "Veg Manchurian Gravy",
-            "Bhendi Tomato",
+            "Aloo Gobhi",
             "Chapati",
-            "Dal Kolhapudi",
+            "Panchmel Dal",
             "Veg Fried Rice",
             "Salad",
             "Curd",
@@ -978,7 +845,41 @@
         ],
         "specialItems": {
             "lunch": [],
-            "dinner": []
+            "dinner": ["Fish Curry", "Rasgulla"]
+        }
+    },
+
+    "Sunday": {
+        "breakfastItems": [
+            { "name": "Dosa (Variety)", "img": "https://myfoodstory.com/wp-content/uploads/2025/08/Dosa-Recipe-2.jpg" }
+        ],
+        "snacksItems": [
+            { "name": "Noodles", "img": "https://images.getrecipekit.com/20241008094433-blog-20templates-20-3.webp?aspect_ratio=16:9&quality=90&" },
+            { "name": "Pani Puri", "img": "https://cdn.uengage.io/uploads/28289/image-A6ACXD-1723273087.jpg" }
+        ],
+        "lunch": [
+            "Kadhai Paneer / Garlic Mushroom",
+            "Karela Pyaz Dry",
+            "Chapati",
+            "Moong Dal Hing Tadka",
+            "Steam Rice",
+            "Salad",
+            "Roasted Papad",
+            "Curd"
+        ],
+        "dinner": [
+            "Kathal Masala Gravy",
+            "Besan Shimla Mirch",
+            "Chapati / Rice",
+            "Dal Masoor",
+            "Veg Khichdi",
+            "Salad",
+            "Curd",
+            "Roasted Papad"
+        ],
+        "specialItems": {
+            "lunch": ["Butter Chicken", "Laccha Paratha"],
+            "dinner": ["Paneer Bhurji", "Moong Dal Halwa"]
         }
     }
 };
