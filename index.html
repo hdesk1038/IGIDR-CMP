@@ -639,23 +639,57 @@
     <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
     <script>
         // Menu data
-        const weeklyMenu = {
+         const weeklyMenu = {
     "Monday": {
         breakfastItems: [
-            { name: "Whole Moong Dal Chilla", img: "https://www.funfoodfrolic.com/wp-content/uploads/2021/08/Dal-Cheela-Thumbnail.jpg" },
-            { name: "Sabudana Khichdi", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1Win_c0k7VsHv60laTst5uR3Gdo9xPM8yug&s" }
+            { name: "Mix sprouts (moong, matki)", img: "https://www.funfoodfrolic.com/wp-content/uploads/2020/09/Sprout-Salad-1.jpg" },
+            { name: "onion uttapam", img: "https://www.funfoodfrolic.com/wp-content/uploads/2015/09/Onion_and_Tomato_Uttapam_Recipe-683x1024.jpg" }
         ],
 
         snacksItems: [
-            { name: "Samosa", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7AciR0_8DqIPX0FYx_51OST_kYRnQ7GZJN9_yDF6EsQ&s=10" },
-            { name: "Dhokla", img: "https://commons.wikimedia.org/wiki/Special:FilePath/Khaman%20dhokla.jpg" }
+            { name: "Samosa", img: "https://www.funfoodfrolic.com/wp-content/uploads/2013/11/Moong-Dal-Samosa-2.jpg" },
+            { name: "Dhokla", img: "https://shwetainthekitchen.com/wp-content/uploads/2023/04/instant-khaman-dhokla-recipe.jpg" }
         ],
 
         lunch: [
-            "Rajma Masala",
-            "Aloo Jeera",
+            "Soyabean aloo",
+            "lauki chana dal dry",
             "Chapati",
             "Dal Tadka",
+            "Steamed Rice",
+            "Salad",
+            "Roasted Papad",
+            "Curd"
+        ],
+
+        dinner: [
+            "Palak Paneer",
+            "Gajar methi matar",
+            "Chapati",
+            "arhar dal tadka",
+            "Jeera Rice",
+            "Salad",
+            "veg raita",
+            "Fryums"
+        ]
+    },
+
+    "Tuesday": {
+        breakfastItems: [
+            { name: "aloo chole puri", img: "https://img.magnific.com/free-photo/chole-bhature-delicious-indian-street-food-platter_23-2151998586.jpg?w=360" },
+            { name: "Veg Daliya", img: "https://img.magnific.com/free-psd/vibrant-yellow-vegetable-porridge-with-peas-carrots-served-metal-bowl-isolated-black-background_84443-59253.jpg?semt=ais_hybrid&w=740&q=80" }
+        ],
+
+        snacksItems: [
+            { name: "Bhel Puri", img: "https://png.pngtree.com/png-clipart/20250514/original/pngtree-bhel-puri-with-chopped-tomatoes-onions-and-fried-noodles-png-image_20982804.png" },
+            { name: "vada pav", img: "https://img.magnific.com/premium-photo/indian-famous-street-food-vada-pav_55610-2880.jpg?semt=ais_hybrid&w=740&q=80" }
+        ],
+
+        lunch: [
+            "Black Chana Sabji",
+            "cabbage peas dry",
+            "Chapati",
+            "arhar dal tadka",
             "Jeera Rice",
             "Salad",
             "Roasted Papad",
@@ -663,44 +697,10 @@
         ],
 
         dinner: [
-            "Lauki Chana Gravy",
-            "Soyabean Masala",
-            "Chapati",
-            "Veg Moong Dal",
-            "Steam Rice",
-            "Salad",
-            "Curd",
-            "Roasted Papad"
-        ]
-    },
-
-    "Tuesday": {
-        breakfastItems: [
-            { name: "Ragi Uttapam", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXojTG4MG5OorJ1QQGKGSG9tacZPcMUygqZzHJlAcOoQ&s=10" },
-            { name: "Kanda Peanut Poha", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHSbWRcPzYN8rkcLNtVwN3osFcFlMc7ij6ZA&s" }
-        ],
-
-        snacksItems: [
-            { name: "Bhel Puri", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRy-evzClpShUaGeo6J5BaGnUl-1Ev2ruC4JPzupJ-eFBhIIEwZWlh0GiyI&s=10" },
-            { name: "Pav Bhaji", img: "https://commons.wikimedia.org/wiki/Special:FilePath/Pav%20Bhaji.jpg" }
-        ],
-
-        lunch: [
-            "Veg Kofta",
-            "Kaddu Chatpata Dry",
-            "Chapati",
-            "Chana Dal Tadka",
-            "Steam Rice",
-            "Salad",
-            "Roasted Papad",
-            "Curd"
-        ],
-
-        dinner: [
-            "Paneer Butter Masala",
-            "Besan Shimla Mirch",
-            "Chapati",
-            "Dal Makhani",
+            "aloo chole masala",
+            "Kaddu dry",
+            "Paratha",
+            "Moong Dal Fry",
             "Steam Rice",
             "Salad",
             "Curd",
@@ -710,32 +710,32 @@
 
     "Wednesday": {
         breakfastItems: [
-            { name: "Aloo Paneer Paratha", img: "https://i.ytimg.com/vi/Vnbm8WYyhX0/maxresdefault.jpg" },
-            { name: "Pineapple Sheera", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4YfkZk1It7yl2DrexkQUPHBnuZ2jbewgr4EIV_ApU0w&s=10" }
+            { name: "Idli/Medu vada", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa7QWWaCRxmkSi8HqQJGh9gMEoEuxh9AISMTsBfRpKPEMpOomiuOYR_C6Q&s=10" },
+            { name: "Onion batata poha", img: "https://www.indianhealthyrecipes.com/wp-content/uploads/2020/01/poha.jpg" }
         ],
 
         snacksItems: [
-            { name: "Dahi Vada", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9773zHq8ctsHBPZ5EhVr_Euq1RxoEElxLjXxfu2wvKQ&s=10" },
-            { name: "Bread Pakoda", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT55O2G49WQsAuYL0bZJfG3uETOVaec5aSXuR0Eqtu55w&s=10" }
+            { name: "Mix bhajiya", img: "https://i.ytimg.com/vi/QA-25_gzpnY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLClDMI0ToW4xwwGWD-wn8s8dpwU_g" },
+            { name: "Dahi papdi chaat", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmi6HhNgaJaVv-BRkXFI2WpElbM8hCrnb5bPWbNIVMdAuAKZX4owkBD7c&s=10" }
         ],
 
         lunch: [
-            "Besan Kadhi Pakora",
-            "Bhindi Do Pyaza",
+            "Rajma Gravy Sabji",
+            "Kundru/parwal masala",
             "Chapati",
-            "Arhar Dal",
-            "Lemon Rice",
+            "chana dal",
+            "Steamed Rice",
             "Salad",
-            "Roasted Papad",
+            "Fryums",
             "Veg Raita"
         ],
 
         dinner: [
-            "Kashmiri Dum Aloo",
-            "Gajar Matar Methi",
+            "methi malai matar",
+            "Aloo peas dry",
             "Chapati",
-            "Dal Tadka",
-            "Steam Rice",
+            "arhar dal tadka",
+            "lemon rice",
             "Salad",
             "Curd",
             "Roasted Papad"
@@ -744,31 +744,31 @@
 
     "Thursday": {
         breakfastItems: [
-            { name: "Onion Uttapam", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXojTG4MG5OorJ1QQGKGSG9tacZPcMUygqZzHJlAcOoQ&s=10" },
-            { name: "Veg Upma", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLYd54-g9888CQ_7CAkda2nC8mz2zyOZ5TOIpWv4RNKg&s=10" }
+            { name: "Aloo onion Paratha", img: "https://thumbs.dreamstime.com/b/indian-breakfast-aloo-paratha-potato-pancakes-served-yogurt-dip-87658775.jpg" },
+            { name: "samiya upma", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSf_-whhmmdYes3-t5tXY231UJSfG7qcMqBfkwktk6rzra_Dnf4a-MkRc&s=10" }
         ],
 
         snacksItems: [
-            { name: "Mix Bhajiya", img: "https://www.indianhealthyrecipes.com/wp-content/uploads/2023/06/cutlet-recipe-veg-cutlet.jpg" },
-            { name: "Chana Chaat", img: "https://www.jcookingodyssey.com/wp-content/uploads/2013/06/kala-chana-chaat-4.jpg" }
+            { name: "Pav Bhaji", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfuc5l2M6lU-7xR5YkPVfo0byWWq_hH1nCaAqnCcrENDZZzVPpU6h81dc&s=10" },
+            { name: "Sweet corn chaat", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkKHKxHU8iYleANnKwPDxgBcpGRKAW9g5Uz5s49LY6uKqcoaXDtetJoXPO&s=10" }
         ],
 
         lunch: [
-            "Besan Gatta Curry",
-            "Papaya Poriyal",
+            "Shahi paneer",
+            "coconut beans dry",
             "Chapati",
             "Dal Makhani",
-            "Steam Rice",
+            "Jeera Rice",
             "Salad",
             "Roasted Papad",
             "Curd"
         ],
 
         dinner: [
-            "Methi Malai Matar",
-            "Coconut Beans Dry",
+            "Soyabean masala",
+            "Gobhi matar fry",
             "Chapati",
-            "Arhar Dal",
+            "Chana dal tadka",
             "Steam Rice",
             "Salad",
             "Curd",
@@ -778,47 +778,47 @@
 
     "Friday": {
         breakfastItems: [
-            { name: "Aloo Chole Puri", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-xK675VgU6gp-3Rh66S64PnZ2OTUoIEHRRzlumo_AYA&s=10" },
-            { name: "Onion Batata Poha", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHSbWRcPzYN8rkcLNtVwN3osFcFlMc7ij6ZA&s" }
+            { name: "Dosa(variety)", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3-QWp1IaMXJV65sx1YDqEhDgTWO_Ze7tXScqM857VX3xqT73ynsRVkL4L&s=10" },
+            
         ],
 
         snacksItems: [
-            { name: "Masala Idli", img: "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_960,w_960//InstamartAssets/Masala_Idli.webp" },
-            { name: "Sabudana Vada", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBZVIx0V9F-vsH55pKfoiHSFdnPmUx1rrGRw&s" }
+            { name: "samosa", img: "https://www.funfoodfrolic.com/wp-content/uploads/2013/11/Moong-Dal-Samosa-2.jpg" },
+            { name: "Dahi vada", img: "https://static.toiimg.com/thumb/55432577.cms?imgsize=240828&width=800&height=800" }
         ],
 
         lunch: [
-            "Paneer Tikka Masala",
-            "Aloo Bhindi Pyaz Dry",
+            "Besan kadhi pakora",
+            "Kurkuri bhindi",
             "Chapati",
-            "Dal Kolhapuri",
+            "Mix dal dry",
             "Steam Rice",
             "Salad",
-            "Fryums",
+            "Rosted Papad",
             "Curd"
         ],
 
         dinner: [
-            "Lauki Kofta",
+            "aloo dum",
             "Veg Tawa Dry",
             "Chapati",
-            "Kali Masoor Dal",
-            "Steam Rice",
+            "arhar dal tadka",
+            "Jeera Rice",
             "Salad",
-            "Curd",
+            "boondi raita",
             "Roasted Papad"
         ]
     },
 
     "Saturday": {
         breakfastItems: [
-            { name: "Idli", img: "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_960,w_960//InstamartAssets/Masala_Idli.webp" },
-            { name: "Medu Vada", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBZVIx0V9F-vsH55pKfoiHSFdnPmUx1rrGRw&s" }
+            { name: "misal pav", img: "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_960,w_960//InstamartAssets/Masala_Idli.webp" },
+            { name: "Kanda Poha", img: "https://www.indianhealthyrecipes.com/wp-content/uploads/2020/01/poha.jpg" }
         ],
 
         snacksItems: [
-            { name: "Vada Pav", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNMad8MNNZexnedj0FoqRVW26jnSeT5LuMcox2FeSkSQ&s=10" },
-            { name: "Corn Chaat", img: "https://www.indianhealthyrecipes.com/wp-content/uploads/2024/05/corn-chaat-recipe.jpg" }
+            { name: "Tomato Rasam Vada", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL6R4Qs4ExEXeK1O-K-wP8ZYI6-2BJWKMa1u-aOcNpmmH9Eg9bzhXhY54&s=10" },
+            { name: "Dhokla", img: "https://shwetainthekitchen.com/wp-content/uploads/2023/04/instant-khaman-dhokla-recipe.jpg" }
         ],
 
         lunch: [
@@ -833,49 +833,52 @@
         ],
 
         dinner: [
-            "Black Chana Masala",
-            "Gobhi Matar Dry",
+            "veg manchurian gravy",
+            "Chilli potato",
             "Chapati",
-            "Arhar Dal Tadka",
-            "Steam Rice",
+            "dal Kolhapuri",
+            "fried rice",
             "Salad",
             "Curd",
-            "Roasted Papad"
+            "Fryums"
         ]
     },
 
     "Sunday": {
         breakfastItems: [
-            { name: "Dosa (Variety)", img: "https://myfoodstory.com/wp-content/uploads/2025/08/Dosa-Recipe-2.jpg" }
+            { name: "whole Moong dal chilla", img: "https://www.kuchpakrahahai.in/wp-content/uploads/2016/06/Green-moong-dal-chilla.jpg" }
+            { name: "veg upma", img: "https://d1uz88p17r663j.cloudfront.net/original/ba32df908435796279e3d79f0d5fbdc1_Rava_Upma_-_Twist.jpg" }
         ],
 
         snacksItems: [
-            { name: "Rolls (Variety)", img: "https://www.indianhealthyrecipes.com/wp-content/uploads/2023/06/cutlet-recipe-veg-cutlet.jpg" },
+            { name: "Veg hakka noodles", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrF3MRlNahuUnEcEQ4sHHQVGueg9WlWbmD0bkPUWy_fZttoT9gqZeqL84&s=10" },
             { name: "Pani Puri", img: "https://cdn.uengage.io/uploads/28289/image-A6ACXD-1723273087.jpg" }
         ],
 
         lunch: [
-            "Mushroom Matar",
-            "Cabbage Peas Dry",
+            "lauki kofta",
+            "Karela pyaz dry",
             "Chapati",
-            "Arhar Dal Tadka",
-            "Jeera Rice",
+            "Dal Makhani",
+            "Steamed Rice",
             "Salad",
-            "Roasted Papad",
+            "Fryums",
             "Curd"
         ],
 
         dinner: [
-            "Veg Manchurian",
-            "Chilli Potato",
-            "Veg Hakka Noodles",
+            "Sev tamatar bhaji",
+            "Besan shimla mirch masala",
+            "Chapati/rice",
+            "dal masoor",
+            "veg khichdi(carrot, peas)",
             "Salad",
-            "Fryums",
-            "Lemon Coriander Soup"
+            "curd",
+            "Rosted Papad"
+           
         ]
     }
-};
-        function getCurrentDayName() {
+};        function getCurrentDayName() {
             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             const today = new Date();
             return days[today.getDay()];
